@@ -123,7 +123,6 @@ export type Project = {
   deliverable: string;
 };
 
-const asset = (p: string) => `/${encodeURI(`DIS STUDIO/${p}`)}`;
 const shot = (slug: string, n: number) =>
   `/projets/${slug}/${String(n).padStart(2, "0")}.jpg`;
 
@@ -290,12 +289,12 @@ export const projects: Project[] = [
     summary:
       "Volumes et matières hors bâtiment : aménagement d'un yacht et mise en situation d'un porteur utilitaire.",
     images: [
-      asset("3DS MAX/Camion en 3D/6.f.jpg"),
-      asset("3DS MAX/Yacht en 3D/1.jpg"),
-      asset("3DS MAX/Yacht en 3D/2.jpg"),
-      asset("3DS MAX/Yacht en 3D/3.jpg"),
-      asset("3DS MAX/Camion en 3D/1.f.jpg"),
-      asset("3DS MAX/Camion en 3D/7f.jpg"),
+      shot("modelisation-produit", 1),
+      shot("modelisation-produit", 2),
+      shot("modelisation-produit", 3),
+      shot("modelisation-produit", 4),
+      shot("modelisation-produit", 5),
+      shot("modelisation-produit", 6),
     ],
     drawingsOnly: true,
     deliverable: "Modélisation 3D · 11 vues",
@@ -370,7 +369,7 @@ export const studio = {
     "DIS Studio conçoit des intérieurs réfléchis, du premier concept aux dessins prêts pour la production, et accompagne les studios de design comme partenaire de production à distance.",
   location: "Tunis, Tunisie",
   email: "contact@disstudio.tn",
-  since: "2024",
+  since: "2026",
 };
 
 export const b2b = {
@@ -469,7 +468,7 @@ export const requestStages = [
 ] as const;
 
 export const portalRequest = {
-  reference: "DIS-2024-087",
+  reference: "DIS-2026-087",
   title: "Villa contemporaine, étage",
   service: "Design complet",
   stageIndex: 2,

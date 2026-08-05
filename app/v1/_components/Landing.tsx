@@ -2,6 +2,13 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import Assistant from "../../_components/Assistant";
+import { ArrowRight, Portal } from "../../_components/Icons";
+import IntakeWizard from "../../_components/IntakeWizard";
+import Lightbox from "../../_components/Lightbox";
+import PlanFigure from "../../_components/PlanFigure";
+import PortalDrawer from "../../_components/PortalDrawer";
+import VersionSwitch from "../../_components/VersionSwitch";
 import {
   ambience,
   b2b,
@@ -13,14 +20,12 @@ import {
 } from "../../_lib/content";
 import { sizeOf } from "../../_lib/imageSizes";
 import { useReveal } from "../../_lib/useReveal";
-import Assistant from "../../_components/Assistant";
-import { ArrowRight, Portal } from "../../_components/Icons";
-import IntakeWizard from "../../_components/IntakeWizard";
-import Lightbox from "../../_components/Lightbox";
-import PlanFigure from "../../_components/PlanFigure";
-import PortalDrawer from "../../_components/PortalDrawer";
 
-type Track = "clients" | "studios";
+const slides = [
+  ambience.heroSalon,
+  ambience.salonPoutres,
+  ambience.sejourBois,
+] as const;
 
 /**
  * The gallery shows coloured 3D views only. Dimensioned drawings stay on their
@@ -33,26 +38,27 @@ const galleryShots = projects
 export default function Landing() {
   const [wizard, setWizard] = useState(false);
   const [portal, setPortal] = useState(false);
-  const [track, setTrack] = useState<Track>("clients");
+  const [slide, setSlide] = useState(0);
   const [solid, setSolid] = useState(false);
   const [openProject, setOpenProject] = useState<string | null>(null);
   useReveal();
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.82);
+    const onScroll = () => setSolid(window.scrollY > window.innerHeight * 0.8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const forStudios = track === "studios";
-
-  /*
-   * The segmenter re-weights the page rather than just swapping a label: the
-   * studios track shows the production work — drawing sets and modelling —
-   * which is what a partner studio is buying.
-   */
-  const shown = forStudios ? projects.filter((p) => p.drawingsOnly) : projects;
+  /* Auto-advance, paused for visitors who prefer reduced motion. */
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(
+      () => setSlide((s) => (s + 1) % slides.length),
+      7000,
+    );
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <>
@@ -63,7 +69,7 @@ export default function Landing() {
           DIS Studio
         </a>
         <nav className="nav-links" aria-label="Principale">
-          <a href="#realisations">Réalisations</a>
+          <a href="#projets">Projets</a>
           <a href="#galerie">Galerie</a>
           <a href="#services">Services</a>
           <a href="#studios">Pour les studios</a>
@@ -71,120 +77,116 @@ export default function Landing() {
         </nav>
         <div className="nav-actions">
           <button className="nav-portal" onClick={() => setPortal(true)}>
-            <Portal />
-            <span>Espace client</span>
+            <Portal size={16} />
+            Espace client
           </button>
           <button
-            className="nav-portal-sm"
+            className="icon-btn icon-only"
             onClick={() => setPortal(true)}
             aria-label="Espace client"
           >
             <Portal size={20} />
           </button>
           <button className="cta" onClick={() => setWizard(true)}>
-            {/* Short label on mobile; the hero already carries the full CTA. */}
-            <span className="cta-long">Démarrer un projet</span>
-            <span className="cta-short">Demander</span>
-            <ArrowRight className="arrow" />
+            Mon projet
           </button>
         </div>
         </div>
       </header>
 
       <main id="top">
-        {/* ---------- hero ---------- */}
+        {/* ---------- hero carousel ---------- */}
         <section className="hero">
-          <div className="hero-media">
-            <Image
-              src={ambience.heroSalon.src}
-              alt={ambience.heroSalon.alt}
-              fill
-              priority
-              sizes="100vw"
-              style={{ objectFit: "cover" }}
-            />
-            <div className="hero-scrim" />
-          </div>
+          {slides.map((s, i) => (
+            <div key={s.key} className="hero-slide" data-active={i === slide}>
+              <Image
+                src={s.src}
+                alt={i === slide ? s.alt : ""}
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          ))}
+          <div className="hero-scrim" />
 
           <div className="shell hero-inner">
-            <div>
-              <h1 className="serif hero-title">
-                Des intérieurs pensés <em>jusqu’au dernier trait</em>
-              </h1>
+            {/* <p className="label" style={{ color: "inherit", opacity: 0.8 }}>
+              {studio.location} · Depuis {studio.since}
+            </p> */}
+            <h1 className="disp">
+              Des lieux où l’on se sent <em>chez soi</em>
+            </h1>
+            <p className="hero-lede">
+              Concept, aménagement et matières : nous dessinons des intérieurs
+              chaleureux, jusqu’aux plans que vos entreprises pourront suivre.
+            </p>
+            <div className="hero-actions">
+              <button className="cta" onClick={() => setWizard(true)}>
+                Parler de mon projet
+                <ArrowRight className="arrow" />
+              </button>
+              <a className="ghost" href="#projets">
+                Voir les projets
+                <ArrowRight className="arrow" />
+              </a>
             </div>
 
             <div className="hero-foot">
-              <p className="hero-blurb">
-                Studio de design d’intérieur et partenaire de production pour les
-                studios qui ont besoin de capacité.
-              </p>
-              <div className="hero-actions">
-                <button className="cta" onClick={() => setWizard(true)}>
-                  Démarrer un projet
-                  <ArrowRight className="arrow" />
-                </button>
-                <a className="ghost" href="#realisations">
-                  Voir les réalisations
-                  <ArrowRight className="arrow" />
-                </a>
+              <div className="hero-nav" role="tablist" aria-label="Images">
+                {slides.map((s, i) => (
+                  <button
+                    key={s.key}
+                    role="tab"
+                    aria-current={i === slide}
+                    aria-label={`Image ${i + 1} sur ${slides.length}`}
+                    onClick={() => setSlide(i)}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </section>
-
-        {/* ---------- dual-track segmenter ---------- */}
-        <div className="segmenter">
-          <div className="shell">
-            <div className="seg-inner" role="tablist" aria-label="Deux offres">
-              <button
-                role="tab"
-                className="seg-btn"
-                aria-selected={!forStudios}
-                onClick={() => setTrack("clients")}
-              >
-                <span className="seg-index">01</span>
-                <span className="seg-name">Particuliers &amp; entreprises</span>
-              </button>
-              <button
-                role="tab"
-                className="seg-btn"
-                aria-selected={forStudios}
-                onClick={() => setTrack("studios")}
-              >
-                <span className="seg-index">02</span>
-                <span className="seg-name">Studios de design</span>
-              </button>
-            </div>
-          </div>
-        </div>
 
         {/* ---------- intro ---------- */}
         <section className="section shell">
           <div className="intro-grid">
-            <p className="label" data-reveal>
-              {forStudios ? "Partenaire de production" : "Le studio"}
-            </p>
-            <div className="intro-body">
-              {/* The positioning statement is this section's heading — keeps
-                  h1 → h2 → h3 sequential for screen readers. */}
-              <h2 className="lede serif" data-reveal style={{ lineHeight: 1.3 }}>
-                {forStudios
-                  ? "Nous produisons pour d’autres studios, à vos gabarits et sous votre nom."
-                  : studio.positioning}
+            <div className="intro-media" data-reveal>
+              {/* An architectural overview reads as "studio", where a bedroom
+                  detail read as decoration. */}
+              <Image
+                src={ambience.archiVerriere.src}
+                alt={ambience.archiVerriere.alt}
+                fill
+                sizes="(min-width: 56rem) 34vw, 92vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+            <div>
+              <p className="label" data-reveal>
+                Le studio
+              </p>
+              {/* Serves as this section's heading — keeps h1 → h2 → h3 sequential. */}
+              <h2 className="intro-lede" data-reveal style={{ marginTop: "1rem" }}>
+                Un intérieur réussi se remarque à peine. Il se vit.
               </h2>
-              <div className="intro-tracks">
-                <div className="track" data-reveal data-delay="1">
-                  <h3>Conception</h3>
+              <p className="prose" data-reveal style={{ marginTop: "1.25rem" }}>
+                {studio.positioning}
+              </p>
+              <div className="intro-cols">
+                <div data-reveal data-delay="1">
+                  <h3>Pour vous</h3>
                   <p>
-                    Concept, aménagement, matières. Le projet prend forme avant
-                    d’exister, jusqu’aux plans que vos entreprises pourront suivre.
+                    Maisons, appartements, restaurants et bureaux, du concept
+                    jusqu’au chantier, avec un interlocuteur unique.
                   </p>
                 </div>
-                <div className="track" data-reveal data-delay="2">
-                  <h3>Production</h3>
+                <div data-reveal data-delay="2">
+                  <h3>Pour les studios</h3>
                   <p>
-                    Une équipe de dessin et de modélisation à Tunis, rompue aux
-                    dossiers techniques et aux délais courts.
+                    Une équipe de production à Tunis qui prend le relais sur vos
+                    dossiers techniques, à vos gabarits.
                   </p>
                 </div>
               </div>
@@ -192,58 +194,59 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* ---------- portfolio ---------- */}
-        <section className="section shell" id="realisations">
-          <div className="sec-head">
-            <h2 data-reveal>
-              {forStudios ? "Production livrée" : "Réalisations"}
-            </h2>
-            <p className="label" data-reveal>
-              {shown.length} projets · 4 catégories
-            </p>
+        {/* ---------- film-strip portfolio ---------- */}
+        <section className="section" id="projets">
+          <div className="shell">
+            <div className="sec-head">
+              <h2 data-reveal>Projets récents</h2>
+              <p className="label" data-reveal>
+                {projects.length} réalisations
+              </p>
+            </div>
           </div>
 
-          <div className="folio">
-            {shown.map((p, i) => (
-              <button
-                className="folio-item"
-                key={p.slug}
-                data-reveal
-                data-delay={(i % 3) + 1}
-                onClick={() => setOpenProject(p.slug)}
-                aria-label={`${p.title}, voir les images`}
-              >
-                <span className="folio-frame">
-                  {/* Every project now carries a real render or drawing; the
-                      PlanFigure fallback remains for any added without one. */}
-                  {p.images?.length ? (
-                    <Image
-                      src={p.images[0]}
-                      alt={`${p.title}, ${p.category}`}
-                      fill
-                      sizes="(min-width: 48rem) 46vw, 92vw"
-                      style={{ objectFit: "cover" }}
-                    />
-                  ) : (
-                    <span className="folio-sheet">
-                      <PlanFigure variant={p.slug} className="folio-plan" />
-                      <span className="folio-sheet-foot">
-                        <span>{p.software}</span>
-                        <span>{p.sheets ? `${p.sheets} planches` : ""}</span>
+          <div className="strip-wrap">
+            <div className="strip">
+              {projects.map((p) => (
+                <button
+                  className="card"
+                  key={p.slug}
+                  onClick={() => setOpenProject(p.slug)}
+                  aria-label={`${p.title} : ${p.category}, voir les images`}
+                >
+                  <span className="card-frame">
+                    {/* Every project now carries a real render or drawing; the
+                        PlanFigure fallback remains for any added without one. */}
+                    {p.images?.length ? (
+                      <Image
+                        src={p.images[0]}
+                        alt={`${p.title}, ${p.category}`}
+                        fill
+                        sizes="(min-width: 48rem) 24rem, 68vw"
+                        style={{ objectFit: "cover" }}
+                      />
+                    ) : (
+                      <span className="card-plan">
+                        <PlanFigure variant={p.slug} />
+                        <span className="card-sheets">
+                          {p.software} · {p.sheets ? `${p.sheets} planches` : ""}
+                        </span>
                       </span>
-                    </span>
-                  )}
-                </span>
-                <span className="folio-caption">
-                  <span className="folio-title">{p.title}</span>
-                  <span className="folio-meta">
-                    <span>{p.category}</span>
-                    <span>{p.software}</span>
-                    <span>{p.year}</span>
+                    )}
                   </span>
-                </span>
-              </button>
-            ))}
+                  <span className="card-body">
+                    <span className="card-title">{p.title}</span>
+                    <span className="card-meta">
+                      {p.category} · {p.year}
+                    </span>
+                  </span>
+                </button>
+              ))}
+            </div>
+            <p className="strip-hint">
+              <ArrowRight size={14} />
+              Faites défiler
+            </p>
           </div>
         </section>
 
@@ -263,7 +266,7 @@ export default function Landing() {
                 data-reveal
                 data-delay={(i % 3) + 1}
                 onClick={() => setOpenProject(project.slug)}
-                aria-label={`${project.title}, agrandir`}
+                aria-label={`${project.title}, agrandir l’image`}
               >
                 {/* Intrinsic width/height: the masonry keeps each image's own
                     ratio, so the tile reserves the right space before load. */}
@@ -283,17 +286,15 @@ export default function Landing() {
         {/* ---------- services ---------- */}
         <section className="section shell" id="services">
           <div className="sec-head">
-            <h2 data-reveal>Ce que nous faisons</h2>
+            <h2 data-reveal>Comment nous travaillons</h2>
           </div>
-          <div className="services">
-            {services.map((s) => (
-              <article className="service" key={s.index} data-reveal>
-                <span className="service-index">{s.index}</span>
-                <div>
-                  <h3>{s.title}</h3>
-                  <p style={{ marginTop: "0.5rem" }}>{s.summary}</p>
-                </div>
-                <ul className="service-detail">
+          <div className="svc">
+            {services.map((s, i) => (
+              <article key={s.index} data-reveal data-delay={(i % 3) + 1}>
+                <span className="svc-i">{s.index}</span>
+                <h3>{s.title}</h3>
+                <p>{s.summary}</p>
+                <ul>
                   {s.detail.map((d) => (
                     <li key={d}>{d}</li>
                   ))}
@@ -306,43 +307,43 @@ export default function Landing() {
         {/* ---------- b2b ---------- */}
         <section className="section b2b" id="studios">
           <div className="shell b2b-grid">
-            <div className="b2b-media" data-reveal>
-              <Image
-                src={ambience.atelierDessin.src}
-                alt={ambience.atelierDessin.alt}
-                fill
-                sizes="(min-width: 62rem) 38vw, 92vw"
-                style={{ objectFit: "cover" }}
-              />
-            </div>
             <div>
               <p className="label" data-reveal>
                 {b2b.title}
               </p>
               <h2
-                className="serif"
+                className="disp"
                 data-reveal
-                style={{ fontSize: "var(--t-h2)", marginTop: "1rem", maxWidth: "22ch" }}
+                style={{ fontSize: "var(--t-h2)", marginTop: "0.85rem", maxWidth: "22ch" }}
               >
                 {b2b.lede}
               </h2>
-              <p className="prose" data-reveal style={{ marginTop: "1.25rem" }}>
+              <p className="prose" data-reveal style={{ marginTop: "1.1rem" }}>
                 {b2b.body}
               </p>
-              <div className="b2b-points">
+              <div className="b2b-list">
                 {b2b.points.map((pt, i) => (
-                  <div className="b2b-point" key={pt.title} data-reveal data-delay={i + 1}>
+                  <div key={pt.title} data-reveal data-delay={i + 1}>
                     <h3>{pt.title}</h3>
                     <p>{pt.body}</p>
                   </div>
                 ))}
               </div>
-              <p style={{ marginTop: "2rem" }}>
+              <p style={{ marginTop: "1.9rem" }}>
                 <button className="cta" onClick={() => setWizard(true)}>
                   Demander une capacité
                   <ArrowRight className="arrow" />
                 </button>
               </p>
+            </div>
+            <div className="b2b-media" data-reveal>
+              <Image
+                src={ambience.atelierDessin.src}
+                alt={ambience.atelierDessin.alt}
+                fill
+                sizes="(min-width: 58rem) 46vw, 92vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
           </div>
         </section>
@@ -350,43 +351,42 @@ export default function Landing() {
         {/* ---------- software ---------- */}
         <section className="section shell">
           <div className="sec-head">
-            <h2 data-reveal>Logiciels &amp; livrables</h2>
+            <h2 data-reveal>Nos outils</h2>
             <p className="label" data-reveal>
               Fichiers sources fournis
             </p>
           </div>
           <div className="soft">
             {software.map((s) => (
-              <div className="soft-row" key={s.name} data-reveal>
-                <span className="soft-name serif">{s.name}</span>
-                <span className="soft-use">{s.use}</span>
+              <div key={s.name} data-reveal>
+                <span className="soft-n">{s.name}</span>
+                <span className="soft-u">{s.use}</span>
               </div>
             ))}
           </div>
         </section>
 
         {/* ---------- contact ---------- */}
-        <section className="section contact" id="contact">
-          <div className="contact-media">
+        <section className="section shell contact" id="contact">
+          <div className="contact-card" data-reveal>
             <Image
-              src={ambience.salonPoutres.src}
+              src={ambience.chambreChaude.src}
               alt=""
               fill
               sizes="100vw"
+              className="contact-img"
               style={{ objectFit: "cover" }}
             />
-          </div>
-          <div className="shell contact-inner">
-            <p className="label" style={{ color: "inherit", opacity: 0.7 }} data-reveal>
-              Demande de prestation
+            <p className="label" style={{ color: "inherit", opacity: 0.8 }}>
+              Démarrer
             </p>
-            <h2 data-reveal>Dites-nous où vous en êtes</h2>
-            <p data-reveal>
-              Quelques questions adaptées à votre projet, et nous revenons vers vous
-              sous 24 h ouvrées avec une première lecture.
+            <h2>Racontez-nous votre lieu</h2>
+            <p>
+              Quelques questions adaptées à votre projet, et nous revenons vers
+              vous sous 24 h ouvrées avec une première lecture, sans engagement.
             </p>
-            <button className="cta" onClick={() => setWizard(true)} data-reveal>
-              Ouvrir le formulaire
+            <button className="cta" onClick={() => setWizard(true)}>
+              Parler de mon projet
               <ArrowRight className="arrow" />
             </button>
           </div>
@@ -397,13 +397,13 @@ export default function Landing() {
         <div className="shell">
           <div className="foot-grid">
             <div>
-              <p className="wordmark" style={{ color: "var(--os)" }}>
-                DIS Studio
-              </p>
-              <p style={{ marginTop: "0.75rem", maxWidth: "34ch", lineHeight: 1.7 }}>
+              <p className="wordmark">DIS Studio</p>
+              <p style={{ marginTop: "0.7rem", maxWidth: "34ch", lineHeight: 1.7 }}>
                 {studio.tagline}. Conception et production à Tunis.
+                    {/* <p>© {studio.since} DIS Studio</p> */}
               </p>
             </div>
+            
             <div>
               <h3>Studio</h3>
               <ul style={{ display: "grid", gap: "0.4rem" }}>
@@ -417,7 +417,7 @@ export default function Landing() {
               <h3>Naviguer</h3>
               <ul style={{ display: "grid", gap: "0.4rem" }}>
                 <li>
-                  <a href="#realisations">Réalisations</a>
+                  <a href="#projets">Projets</a>
                 </li>
                 <li>
                   <a href="#services">Services</a>
@@ -431,13 +431,14 @@ export default function Landing() {
               </ul>
             </div>
           </div>
-          <div className="foot-base">
+          {/* <div className="foot-base">
             <p>{photoCredit}</p>
             <p>© {studio.since} DIS Studio</p>
-          </div>
+          </div> */}
         </div>
       </footer>
 
+      <VersionSwitch />
       <Assistant />
       <IntakeWizard open={wizard} onClose={() => setWizard(false)} />
       <PortalDrawer open={portal} onClose={() => setPortal(false)} />

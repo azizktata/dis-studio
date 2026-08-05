@@ -6,7 +6,7 @@ import type { ServiceKey } from "./content";
 /**
  * State machine behind the three-step intake wizard.
  *
- * Kept here rather than in a version folder so v1 and v3 can each render
+ * Kept here rather than in a version folder so each version can render
  * their own markup around identical behaviour. Styling lives with the version.
  */
 

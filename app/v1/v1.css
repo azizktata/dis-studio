@@ -1,55 +1,53 @@
 /*
-  v1 — Atelier Éditorial
-  Architectural monograph: photography leads, interface recedes.
-  Warm bone base, clay reserved for true calls to action.
+  v1 — Symphonie Lumineuse
+  Warm and soft: sand ground, generous curves, imagery that
+  moves. Scandinavian/Mediterranean rather than editorial or technical.
 */
 
 .v1 {
-  /* Neutrals tinted toward the clay hue so surfaces and accent feel related. */
-  --os: oklch(96.2% 0.012 76);
-  --os-deep: oklch(93.4% 0.016 74);
-  --sable: oklch(91.2% 0.021 74);
-  --sable-deep: oklch(87.5% 0.026 72);
-  --encre: oklch(23.5% 0.012 62);
-  --encre-soft: oklch(34% 0.014 62);
-  /* Darkened from the brief's #8A8178 to clear 4.5:1 on bone. */
-  --gris: oklch(50.5% 0.014 68);
-  --gris-light: oklch(62% 0.014 70);
-  --argile: oklch(52% 0.114 43);
-  --argile-deep: oklch(45% 0.106 42);
-  --rule: color-mix(in oklab, var(--encre) 14%, transparent);
-  --rule-strong: color-mix(in oklab, var(--encre) 26%, transparent);
+  --sable: oklch(94.4% 0.017 74);
+  --sable-2: oklch(91.2% 0.023 71);
+  --os: oklch(97% 0.011 78);
+  --encre: oklch(25% 0.016 58);
+  --encre-2: oklch(36% 0.016 60);
+  /* Darkened from the brief's warm grey to clear AA on sand. */
+  --gris: oklch(49% 0.017 64);
+  --argile: oklch(51% 0.12 42);
+  --argile-2: oklch(44% 0.11 41);
+  --terre: oklch(63% 0.086 55);
+  --line: color-mix(in oklab, var(--encre) 13%, transparent);
 
-  --serif: var(--font-bodoni), "Times New Roman", serif;
-  --sans: var(--font-public), ui-sans-serif, system-ui, sans-serif;
+  --display: var(--font-petrona), Georgia, serif;
+  --body: var(--font-signika), ui-sans-serif, system-ui, sans-serif;
 
-  /* 1.32 ratio — wide steps, few sizes. */
-  --t-display: clamp(2.85rem, 1.2rem + 6.4vw, 6.4rem);
-  --t-h2: clamp(1.95rem, 1.1rem + 3.1vw, 3.4rem);
-  --t-h3: clamp(1.35rem, 1.05rem + 1.1vw, 1.85rem);
-  --t-body: clamp(1rem, 0.97rem + 0.14vw, 1.09rem);
-  --t-small: 0.875rem;
+  --t-display: clamp(2.7rem, 1.1rem + 6.5vw, 6rem);
+  --t-h2: clamp(1.9rem, 1.15rem + 3vw, 3.3rem);
+  --t-h3: clamp(1.25rem, 1.05rem + 0.9vw, 1.7rem);
+  --t-body: clamp(1rem, 0.97rem + 0.16vw, 1.1rem);
+  --t-small: 0.9rem;
   --t-label: 0.72rem;
 
   --pad-x: clamp(1.25rem, 5vw, 5rem);
-  --pad-y: clamp(3.5rem, 8vw, 8rem);
+  --pad-y: clamp(3.75rem, 8vw, 7.5rem);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  /* Height of the fixed nav — the sticky segmenter and anchor offsets track it. */
   --nav-h: 4.25rem;
+  --round: 14px;
 
   background: var(--os);
   color: var(--encre);
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: var(--t-body);
-  line-height: 1.6;
+  line-height: 1.68;
   -webkit-font-smoothing: antialiased;
 }
 
-.v1 ::selection {
-  background: color-mix(in oklab, var(--argile) 22%, transparent);
-}
+@media (min-width: 62rem) { .v1 { --nav-h: 4.75rem; } }
 
-/* ---------- shared primitives ---------- */
+.v1 ::selection { background: color-mix(in oklab, var(--terre) 32%, transparent); }
+
+.v1 :focus-visible { outline: 2px solid var(--argile); outline-offset: 3px; }
+
+/* ---------- primitives ---------- */
 
 .v1 .shell {
   /* `width: 100%` matters: as a grid item .shell would otherwise size to its
@@ -57,145 +55,107 @@
      hero text inset relative to the nav. */
   width: 100%;
   padding-inline: var(--pad-x);
-  max-width: 96rem;
+  max-width: 92rem;
   margin-inline: auto;
 }
 
-.v1 .section {
-  padding-block: var(--pad-y);
-}
+.v1 .section { padding-block: var(--pad-y); }
 
-/* Anchor targets clear the fixed nav plus the sticky segmenter. */
-.v1 [id] {
-  scroll-margin-top: calc(var(--nav-h) + 4.5rem);
-}
+.v1 [id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
 
 .v1 .label {
   font-size: var(--t-label);
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gris);
+  font-weight: 600;
+}
+
+.v1 .disp {
+  font-family: var(--display);
   font-weight: 500;
-}
-
-.v1 .serif {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-variation-settings: "opsz" 96;
+  line-height: 1.08;
   letter-spacing: -0.015em;
-  line-height: 1.06;
 }
 
-.v1 .lede {
-  font-size: clamp(1.1rem, 1rem + 0.6vw, 1.4rem);
-  line-height: 1.55;
-  max-width: 46ch;
-  color: var(--encre-soft);
+.v1 .prose { max-width: 62ch; color: var(--encre-2); }
+
+.v1 .sec-head { display: grid; gap: 0.9rem; margin-bottom: clamp(2rem, 4.5vw, 3.5rem); }
+
+.v1 .sec-head h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--t-h2);
+  line-height: 1.08;
+  max-width: 18ch;
+  text-wrap: balance;
 }
 
-.v1 .prose {
-  max-width: 68ch;
-  color: var(--encre-soft);
+@media (min-width: 52rem) {
+  .v1 .sec-head { grid-template-columns: 1fr auto; align-items: end; }
 }
 
-/*
-  Reveal on scroll — transform/opacity only.
-  Gated on .reveal-ready (set by JS once the observer is attached) so content is
-  never left invisible if scripting is unavailable or the observer never fires.
-*/
+.v1 [data-reveal] { opacity: 1; }
+
 .v1.reveal-ready [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s var(--ease),
-    transform 0.7s var(--ease);
+  transform: translateY(20px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
 }
 
-.v1.reveal-ready [data-reveal][data-revealed] {
-  opacity: 1;
-  transform: none;
-}
+.v1.reveal-ready [data-reveal][data-revealed] { opacity: 1; transform: none; }
 
-.v1 [data-reveal][data-delay="1"] { transition-delay: 0.08s; }
-.v1 [data-reveal][data-delay="2"] { transition-delay: 0.16s; }
-.v1 [data-reveal][data-delay="3"] { transition-delay: 0.24s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .v1 [data-reveal] {
-    opacity: 1;
-    transform: none;
-  }
-}
+.v1 [data-delay="1"] { transition-delay: 0.08s; }
+.v1 [data-delay="2"] { transition-delay: 0.16s; }
+.v1 [data-delay="3"] { transition-delay: 0.24s; }
 
 /* ---------- buttons ---------- */
 
 .v1 .cta {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.6rem;
   background: var(--argile);
   color: var(--os);
-  padding: 0.95rem 1.6rem;
-  border-radius: 2px;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
   font-size: var(--t-small);
-  letter-spacing: 0.04em;
-  font-weight: 500;
-  transition:
-    background 0.3s var(--ease),
-    transform 0.3s var(--ease);
+  font-weight: 600;
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
-.v1 .cta:hover {
-  background: var(--argile-deep);
-  transform: translateY(-1px);
-}
+.v1 .cta:hover { background: var(--argile-2); transform: translateY(-1px); }
 
 .v1 .ghost {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.95rem 0;
+  gap: 0.5rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
   font-size: var(--t-small);
-  letter-spacing: 0.04em;
-  border-bottom: 1px solid var(--rule-strong);
-  transition: border-color 0.3s var(--ease);
+  font-weight: 600;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
 }
 
-.v1 .ghost:hover {
-  border-color: var(--argile);
-}
+.v1 .ghost:hover { border-color: var(--argile); background: color-mix(in oklab, var(--argile) 7%, transparent); }
 
-.v1 .arrow {
-  transition: transform 0.4s var(--ease);
-}
-
-.v1 .cta:hover .arrow,
-.v1 .ghost:hover .arrow {
-  transform: translateX(4px);
-}
-
-.v1 :focus-visible {
-  outline: 2px solid var(--argile);
-  outline-offset: 3px;
-}
+.v1 .arrow { transition: transform 0.4s var(--ease); }
+.v1 .cta:hover .arrow, .v1 .ghost:hover .arrow { transform: translateX(3px); }
 
 /* ---------- nav ---------- */
 
 /*
-  The bar itself is full-bleed so its background and blur reach the edges, but
-  its contents sit in the same max-width column as `.shell` — otherwise the nav
-  runs edge to edge while the hero text is inset, and the two never line up.
+  Full-bleed bar for the background and blur, but its contents share `.shell`'s
+  max-width column so the nav lines up with the hero text instead of running to
+  the viewport edge on wide screens.
 */
 .v1 .nav {
   position: fixed;
   inset: 0 0 auto;
   z-index: 60;
   color: var(--os);
-  transition:
-    background 0.4s var(--ease),
-    color 0.4s var(--ease),
-    border-color 0.4s var(--ease);
-  border-bottom: 1px solid transparent;
+  transition: background 0.45s var(--ease), color 0.45s var(--ease), box-shadow 0.45s var(--ease);
 }
 
 .v1 .nav-inner {
@@ -203,166 +163,104 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.15rem var(--pad-x);
-  max-width: 96rem;
+  height: var(--nav-h);
+  padding-inline: var(--pad-x);
+  max-width: 92rem;
   margin-inline: auto;
 }
 
 .v1 .nav[data-solid="true"] {
-  background: color-mix(in oklab, var(--os) 94%, transparent);
-  backdrop-filter: blur(10px);
+  background: color-mix(in oklab, var(--os) 92%, transparent);
+  backdrop-filter: blur(12px);
   color: var(--encre);
-  border-bottom-color: var(--rule);
+  box-shadow: 0 1px 0 var(--line);
 }
 
 .v1 .wordmark {
-  font-family: var(--serif);
-  font-size: 1.32rem;
-  letter-spacing: 0.02em;
-  font-variation-settings: "opsz" 40;
-  /* The bar is a single line at every width — nothing here may wrap. */
-  white-space: nowrap;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
 }
 
-.v1 .nav-links {
-  display: none;
-  gap: clamp(1rem, 2vw, 2.4rem);
-  font-size: var(--t-small);
-  white-space: nowrap;
-}
+.v1 .nav-links { display: none; gap: clamp(1.25rem, 2.2vw, 2.25rem); font-size: var(--t-small); font-weight: 500; }
 
-.v1 .nav-portal,
-.v1 .nav-actions .cta {
-  white-space: nowrap;
-}
+.v1 .nav-links a { opacity: 0.85; transition: opacity 0.3s var(--ease); }
+.v1 .nav-links a:hover { opacity: 1; }
 
-.v1 .nav-links a {
-  position: relative;
-  padding-block: 0.25rem;
-}
+.v1 .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
 
-.v1 .nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s var(--ease);
-}
+.v1 .nav-actions .cta { padding: 0.6rem 1.05rem; font-size: 0.82rem; }
 
-.v1 .nav-links a:hover::after {
-  transform: scaleX(1);
-}
-
-.v1 .nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* On small screens the CTA shrinks and drops its arrow so the bar stays calm. */
-.v1 .nav-actions .cta {
-  padding: 0.6rem 0.9rem;
-  font-size: 0.8rem;
-}
-
-.v1 .nav-actions .cta .arrow,
-.v1 .cta-long {
-  display: none;
-}
-
-/* Full-length CTA only once the bar has room for it without wrapping. */
-@media (min-width: 68rem) {
-  .v1 .nav-actions .cta {
-    padding: 0.8rem 1.35rem;
-    font-size: var(--t-small);
-  }
-  .v1 .nav-actions .cta .arrow,
-  .v1 .cta-long {
-    display: block;
-  }
-  .v1 .cta-short {
-    display: none;
-  }
-}
-
-.v1 .nav-portal {
-  display: none;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: var(--t-small);
-}
-
-/* Compact portal entry for small screens — icon only, never removed. */
-.v1 .nav-portal-sm {
+.v1 .icon-btn {
   display: inline-grid;
   place-items: center;
   padding: 0.5rem;
+  border-radius: 999px;
   color: inherit;
 }
 
-@media (min-width: 52rem) {
-  .v1 .nav-portal-sm {
-    display: none;
-  }
-}
-
-.v1 .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--argile);
-}
+.v1 .nav-portal { display: none; }
 
 @media (min-width: 52rem) {
-  .v1 .nav-links,
+  .v1 .nav-links { display: flex; }
+  .v1 .nav-actions .cta { padding: 0.75rem 1.35rem; font-size: var(--t-small); }
   .v1 .nav-portal {
-    display: flex;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--t-small);
+    font-weight: 500;
   }
+  .v1 .icon-only { display: none; }
 }
 
-/* ---------- hero ---------- */
+/* The nav bar is a single line at every width. */
+.v1 .wordmark,
+.v1 .nav-links,
+.v1 .nav-portal,
+.v1 .nav-actions .cta { white-space: nowrap; }
+
+/* ---------- hero carousel ---------- */
 
 .v1 .hero {
   position: relative;
   min-height: 100svh;
   display: grid;
   align-items: end;
-  /* Without this the grid sizes .hero-inner to its content, so it never
-     reaches the shared max-width column and the nav sits further left. */
-  justify-items: stretch;
-}
-
-.v1 .hero-media {
-  position: absolute;
-  inset: 0;
   overflow: hidden;
 }
 
-.v1 .hero-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  animation: v1-hero-in 1.6s var(--ease) both;
+.v1 .hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.3s var(--ease);
+  /* The drift animation scales past the frame — clip it here, not just on .hero. */
+  overflow: hidden;
 }
 
-@keyframes v1-hero-in {
-  from { opacity: 0; transform: scale(1.04); }
-  to { opacity: 1; transform: none; }
+.v1 .hero-slide[data-active="true"] { opacity: 1; }
+
+.v1 .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Slow drift keeps the still images feeling alive. */
+.v1 .hero-slide[data-active="true"] img {
+  animation: v1-drift 14s var(--ease) both;
+}
+
+@keyframes v1-drift {
+  from { transform: scale(1.05); }
+  to { transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .v1 .hero-media img { animation: none; }
+  .v1 .hero-slide[data-active="true"] img { animation: none; }
 }
 
 /*
-  Two scrims: a vertical gradient anchoring the type at top and bottom, plus a
-  left-weighted wash so the headline and metadata keep contrast over the bright
-  window side of the photograph.
+  Left-weighted wash plus a vertical gradient. These interiors are bright and
+  high-key, so the type needs a real ground to sit on, not a token tint.
 */
 .v1 .hero-scrim {
   position: absolute;
@@ -370,17 +268,17 @@
   background:
     linear-gradient(
       to right,
-      oklch(18% 0.012 62 / 0.58) 0%,
-      oklch(18% 0.012 62 / 0.34) 42%,
-      oklch(18% 0.012 62 / 0.1) 78%,
-      transparent 100%
+      oklch(20% 0.016 58 / 0.72) 0%,
+      oklch(20% 0.016 58 / 0.5) 38%,
+      oklch(20% 0.016 58 / 0.2) 72%,
+      oklch(20% 0.016 58 / 0.06) 100%
     ),
     linear-gradient(
       to top,
-      oklch(18% 0.012 62 / 0.78) 0%,
-      oklch(18% 0.012 62 / 0.42) 34%,
-      oklch(18% 0.012 62 / 0.28) 62%,
-      oklch(18% 0.012 62 / 0.52) 100%
+      oklch(20% 0.016 58 / 0.68) 0%,
+      oklch(20% 0.016 58 / 0.34) 38%,
+      oklch(20% 0.016 58 / 0.26) 70%,
+      oklch(20% 0.016 58 / 0.46) 100%
     );
 }
 
@@ -388,346 +286,221 @@
   position: relative;
   z-index: 1;
   color: var(--os);
-  padding-block: clamp(6rem, 12vh, 9rem) clamp(2.5rem, 6vh, 4rem);
+  padding-block: clamp(6rem, 12vh, 9rem) clamp(2rem, 5vh, 3.5rem);
   display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
+  gap: clamp(1.5rem, 4vw, 2.5rem);
 }
 
-.v1 .hero-title {
+.v1 .hero h1 {
   font-size: var(--t-display);
-  max-width: 15ch;
+  max-width: 14ch;
   text-wrap: balance;
 }
 
-.v1 .hero-title em {
-  font-style: italic;
-  color: color-mix(in oklab, var(--os) 88%, var(--argile));
+.v1 .hero h1 em { font-style: italic; color: color-mix(in oklab, var(--os) 84%, var(--terre)); }
+
+.v1 .hero-lede {
+  max-width: 40ch;
+  color: color-mix(in oklab, var(--os) 90%, transparent);
+  /* Light on dark needs extra leading. */
+  line-height: 1.75;
 }
 
-.v1 .hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.6rem;
-  font-size: var(--t-label);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: color-mix(in oklab, var(--os) 78%, transparent);
-}
+.v1 .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+
+.v1 .hero-actions .ghost { color: var(--os); border-color: color-mix(in oklab, var(--os) 40%, transparent); }
+.v1 .hero-actions .ghost:hover { border-color: var(--os); background: color-mix(in oklab, var(--os) 12%, transparent); }
 
 .v1 .hero-foot {
-  display: grid;
-  gap: 1.75rem;
-  align-items: end;
-}
-
-.v1 .hero-blurb {
-  max-width: 38ch;
-  color: color-mix(in oklab, var(--os) 90%, transparent);
-  /* Light type on dark reads lighter — give it more leading. */
-  line-height: 1.7;
-}
-
-.v1 .hero-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
   align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.v1 .hero-actions .ghost {
-  color: var(--os);
-  border-bottom-color: color-mix(in oklab, var(--os) 45%, transparent);
-}
+/* Slide selectors: hairline rules, not dots. */
+.v1 .hero-nav { display: flex; gap: 0.5rem; align-items: center; }
 
-.v1 .hero-actions .ghost:hover {
-  border-bottom-color: var(--os);
-}
-
-@media (min-width: 60rem) {
-  .v1 .hero-foot {
-    grid-template-columns: 1fr auto;
-    gap: 3rem;
-  }
-}
-
-/* ---------- segmenter ---------- */
-
-/* Sticks below the fixed nav rather than under it. */
-@media (min-width: 52rem) {
-  .v1 {
-    --nav-h: 4.75rem;
-  }
-}
-
-.v1 .segmenter {
-  position: sticky;
-  top: var(--nav-h);
-  z-index: 40;
-  background: var(--os-deep);
-  border-block: 1px solid var(--rule);
-  scroll-margin-top: var(--nav-h);
-}
-
-.v1 .seg-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.v1 .seg-btn {
+.v1 .hero-nav button {
+  width: 2.5rem;
+  height: 2px;
+  background: color-mix(in oklab, var(--os) 38%, transparent);
+  transition: background 0.4s var(--ease);
   position: relative;
-  text-align: left;
-  padding: clamp(1.1rem, 2.4vw, 1.6rem) 0;
-  color: var(--gris);
-  transition: color 0.3s var(--ease);
 }
 
-.v1 .seg-btn + .seg-btn {
-  padding-left: clamp(1rem, 3vw, 2.5rem);
-  border-left: 1px solid var(--rule);
-}
-
-.v1 .seg-btn[aria-selected="true"] {
-  color: var(--encre);
-}
-
-.v1 .seg-btn::after {
+.v1 .hero-nav button::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: -1px;
-  height: 2px;
-  width: 100%;
-  background: var(--argile);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.45s var(--ease);
+  inset: -0.6rem 0;
 }
 
-.v1 .seg-btn[aria-selected="true"]::after {
-  transform: scaleX(1);
+.v1 .hero-nav button[aria-current="true"] { background: var(--os); }
+
+/* ---------- intro ---------- */
+
+.v1 .intro-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
+
+.v1 .intro-media {
+  position: relative;
+  aspect-ratio: 5 / 6;
+  border-radius: var(--round);
+  overflow: hidden;
 }
 
-.v1 .seg-index {
-  font-size: var(--t-label);
-  letter-spacing: 0.18em;
-  display: block;
-  margin-bottom: 0.4rem;
+.v1 .intro-media img { width: 100%; height: 100%; object-fit: cover; }
+
+.v1 .intro-lede {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.3rem, 1.05rem + 1.3vw, 2.1rem);
+  line-height: 1.28;
+  max-width: 22ch;
+  letter-spacing: -0.01em;
 }
 
-.v1 .seg-name {
-  font-family: var(--serif);
-  font-size: clamp(1.05rem, 0.9rem + 0.7vw, 1.5rem);
-  line-height: 1.15;
-  display: block;
-}
+.v1 .intro-cols { display: grid; gap: 1.5rem; margin-top: 1.75rem; }
 
-/* ---------- intro / dual offer ---------- */
-
-.v1 .intro-grid {
-  display: grid;
-  gap: clamp(2rem, 5vw, 4.5rem);
-}
-
-.v1 .intro-body {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.v1 .track {
-  display: grid;
-  gap: 0.9rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid var(--rule-strong);
-}
-
-.v1 .track h3 {
-  font-family: var(--serif);
+.v1 .intro-cols h3 {
+  font-family: var(--display);
+  font-weight: 600;
   font-size: var(--t-h3);
-  line-height: 1.2;
+  margin-bottom: 0.35rem;
 }
 
-.v1 .track p {
-  color: var(--gris);
-  max-width: 40ch;
-  font-size: var(--t-small);
-  line-height: 1.65;
+.v1 .intro-cols p { color: var(--gris); font-size: var(--t-small); line-height: 1.65; max-width: 38ch; }
+
+@media (min-width: 56rem) {
+  .v1 .intro-grid { grid-template-columns: 0.8fr 1.2fr; }
+  .v1 .intro-cols { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
 }
 
-@media (min-width: 58rem) {
-  /* Narrow label column: the eyebrow is a margin note, not half the page. */
-  .v1 .intro-grid {
-    grid-template-columns: minmax(8rem, 0.28fr) 1fr;
-    align-items: start;
-    column-gap: clamp(2rem, 5vw, 5rem);
-  }
-  .v1 .intro-grid > .label {
-    padding-top: 0.6rem;
-  }
-  .v1 .intro-tracks {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    margin-top: 3rem;
-  }
+/* ---------- film-strip portfolio ---------- */
+
+.v1 .strip-wrap { position: relative; }
+
+/*
+  The strip runs edge to edge, but its first card must line up with the section
+  heading inside .shell — so the inline padding matches the shell's own gutter
+  (its centring margin plus --pad-x) rather than --pad-x alone.
+*/
+.v1 .strip {
+  --shell-gutter: max(
+    var(--pad-x),
+    calc((100vw - 92rem) / 2 + var(--pad-x))
+  );
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  overflow-x: auto;
+  /* `proximity`, not `mandatory`: mandatory pins scrollLeft to the first snap
+     point and makes the resting position unreachable. */
+  scroll-snap-type: x proximity;
+  scroll-padding-inline-start: var(--shell-gutter);
+  padding-inline: var(--shell-gutter);
+  padding-bottom: 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sable-2) transparent;
 }
 
-/* ---------- portfolio ---------- */
+.v1 .strip::-webkit-scrollbar { height: 6px; }
+.v1 .strip::-webkit-scrollbar-thumb { background: var(--sable-2); border-radius: 999px; }
 
-.v1 .sec-head {
+/* A button, so the card opens the lightbox and is keyboard reachable. */
+.v1 .card {
+  flex: 0 0 clamp(16rem, 68vw, 24rem);
+  scroll-snap-align: start;
   display: grid;
-  gap: 1rem;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
-}
-
-.v1 .sec-head h2 {
-  font-family: var(--serif);
-  font-size: var(--t-h2);
-  max-width: 18ch;
-  text-wrap: balance;
-}
-
-@media (min-width: 58rem) {
-  .v1 .sec-head {
-    grid-template-columns: 1fr auto;
-    align-items: end;
-  }
-}
-
-.v1 .folio {
-  display: grid;
-  gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.25rem);
-}
-
-@media (min-width: 48rem) {
-  .v1 .folio {
-    grid-template-columns: 1fr 1fr;
-  }
-  /* Editorial stagger — every second item drops. */
-  .v1 .folio > :nth-child(even) {
-    transform: translateY(clamp(1.5rem, 5vw, 4rem));
-  }
-}
-
-/* A button, so the whole card opens the lightbox and is keyboard reachable. */
-.v1 .folio-item {
-  display: grid;
-  gap: 0.9rem;
+  gap: 0.85rem;
   text-align: left;
-  width: 100%;
   font: inherit;
   color: inherit;
 }
 
-.v1 .folio-frame {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  background: var(--sable);
-  aspect-ratio: 4 / 3;
-}
-
-.v1 .folio-caption {
+.v1 .card-body {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.2rem;
 }
 
-.v1 .folio-title {
-  display: block;
-}
-
-.v1 .folio-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease);
-}
-
-.v1 .folio-item:hover .folio-frame img {
-  transform: scale(1.035);
-}
-
-/*
-  Drawing sets have no render. Rather than a blank grid (a grey box by another
-  name), the tile becomes a drawing sheet: title block, sheet count and an
-  actual plan figure drawn in SVG from the project's own geometry.
-*/
-.v1 .folio-sheet {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  background:
-    linear-gradient(var(--rule) 1px, transparent 1px) 0 0 / 100% 2rem,
-    linear-gradient(90deg, var(--rule) 1px, transparent 1px) 0 0 / 2rem 100%,
-    var(--os-deep);
-}
-
-.v1 .folio-plan {
-  place-self: center;
-  width: min(78%, 20rem);
-  height: auto;
-  color: color-mix(in oklab, var(--encre) 46%, transparent);
-  transition: color 0.5s var(--ease), transform 0.6s var(--ease);
-}
-
-.v1 .folio-item:hover .folio-plan {
-  color: var(--argile);
-  transform: scale(1.02);
-}
-
-/* Title block, as on a real sheet. */
-.v1 .folio-sheet-foot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.7rem clamp(0.9rem, 2.5vw, 1.25rem);
-  border-top: 1px solid var(--rule-strong);
-  background: color-mix(in oklab, var(--os) 62%, transparent);
-  font-size: var(--t-label);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--gris);
-}
-
-.v1 .folio-caption {
-  display: grid;
-  gap: 0.3rem;
-}
-
-.v1 .folio-title {
-  font-family: var(--serif);
+.v1 .card-title {
+  font-family: var(--display);
+  font-weight: 600;
   font-size: var(--t-h3);
-  line-height: 1.2;
+  line-height: 1.15;
   transition: color 0.3s var(--ease);
 }
 
-.v1 .folio-item:hover .folio-title {
+.v1 .card:hover .card-title {
   color: var(--argile);
 }
 
-/* Metadata as typeset text, not badges. */
-.v1 .folio-meta {
+.v1 .card-frame {
+  position: relative;
   display: block;
-  font-size: var(--t-small);
-  color: var(--gris);
+  aspect-ratio: 4 / 5;
+  border-radius: var(--round);
+  overflow: hidden;
+  background: var(--sable);
 }
 
-.v1 .folio-meta span + span::before {
-  content: " · ";
-  color: var(--gris-light);
+.v1 .card-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
 }
+
+.v1 .card:hover .card-frame img { transform: scale(1.04); }
+
+.v1 .card-plan {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  background: linear-gradient(160deg, var(--sable) 0%, var(--sable-2) 100%);
+  color: var(--gris);
+  transition: color 0.5s var(--ease);
+}
+
+.v1 .card:hover .card-plan { color: var(--argile); }
+
+.v1 .card-plan svg { width: 100%; height: auto; }
+
+.v1 .card-sheets {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  font-size: var(--t-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* Sits on the darker end of the sand gradient — needs the ink tone for AA. */
+  color: var(--encre-2);
+  font-weight: 600;
+}
+
+.v1 .card h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--t-h3);
+  line-height: 1.15;
+  transition: color 0.3s var(--ease);
+}
+
+.v1 .card:hover h3 { color: var(--argile); }
+
+.v1 .card-meta { display: block; font-size: var(--t-small); color: var(--gris); }
 
 /* ---------- gallery ---------- */
 
 /*
   True masonry: columns fill top-to-bottom and each tile keeps its own aspect
-  ratio, so tall and wide renders sit together the way a gallery wall does
-  rather than being cropped into equal boxes.
+  ratio, so images run to their natural height instead of being cropped into a
+  uniform grid. `break-inside` stops a tile splitting across a column.
 */
 .v1 .gal {
   column-count: 1;
-  column-gap: clamp(0.75rem, 1.6vw, 1.25rem);
+  column-gap: clamp(0.75rem, 1.8vw, 1.35rem);
 }
 
 @media (min-width: 34rem) {
@@ -742,10 +515,12 @@
   position: relative;
   display: block;
   width: 100%;
-  margin-bottom: clamp(0.75rem, 1.6vw, 1.25rem);
+  margin-bottom: clamp(0.75rem, 1.8vw, 1.35rem);
   break-inside: avoid;
+  border-radius: var(--round);
   overflow: hidden;
   background: var(--sable);
+  transition: transform 0.45s var(--ease);
 }
 
 /* Intrinsic height: the image sets the tile's shape, not a fixed ratio. */
@@ -753,11 +528,18 @@
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.6s var(--ease);
+}
+
+.v1 .gal-item:hover {
+  transform: translateY(-3px);
+}
+
+.v1 .gal-item img {
+  transition: transform 0.7s var(--ease);
 }
 
 .v1 .gal-item:hover img {
-  transform: scale(1.035);
+  transform: scale(1.05);
 }
 
 .v1 .gal-cap {
@@ -765,19 +547,18 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 2.5rem 1rem 0.85rem;
+  padding: 2.75rem 1.1rem 1rem;
   font-size: var(--t-small);
+  font-weight: 600;
   color: var(--os);
   background: linear-gradient(
     to top,
-    oklch(20% 0.012 62 / 0.72),
-    oklch(20% 0.012 62 / 0)
+    oklch(20% 0.016 58 / 0.76),
+    oklch(20% 0.016 58 / 0)
   );
   opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity 0.4s var(--ease),
-    transform 0.4s var(--ease);
+  transform: translateY(8px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
 }
 
 .v1 .gal-item:hover .gal-cap,
@@ -786,245 +567,184 @@
   transform: none;
 }
 
+.v1 .strip-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-inline: max(
+    var(--pad-x),
+    calc((100vw - 92rem) / 2 + var(--pad-x))
+  );
+  font-size: var(--t-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
 /* ---------- services ---------- */
 
-.v1 .services {
+.v1 .svc { display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
+
+.v1 .svc article {
+  background: var(--sable);
+  border-radius: var(--round);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
   display: grid;
-  border-top: 1px solid var(--rule-strong);
+  gap: 0.55rem;
+  align-content: start;
+  transition: background 0.4s var(--ease), transform 0.4s var(--ease);
 }
 
-.v1 .service {
-  display: grid;
-  gap: 0.75rem;
-  padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
-  border-bottom: 1px solid var(--rule);
-  transition: background 0.4s var(--ease);
-}
+.v1 .svc article:hover { background: var(--sable-2); transform: translateY(-2px); }
 
-.v1 .service:hover {
-  background: color-mix(in oklab, var(--sable) 45%, transparent);
-}
-
-.v1 .service-index {
-  font-family: var(--serif);
+.v1 .svc-i {
+  font-family: var(--display);
+  font-weight: 600;
   font-size: var(--t-small);
   color: var(--argile);
-  letter-spacing: 0.08em;
 }
 
-.v1 .service h3 {
-  font-family: var(--serif);
-  font-size: var(--t-h3);
-  line-height: 1.2;
-}
+.v1 .svc h3 { font-family: var(--display); font-weight: 600; font-size: var(--t-h3); line-height: 1.15; }
 
-.v1 .service p {
-  color: var(--gris);
-  max-width: 52ch;
-  line-height: 1.65;
-}
+.v1 .svc p { color: var(--encre-2); font-size: var(--t-small); line-height: 1.6; }
 
-.v1 .service-detail {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 1.1rem;
-  font-size: var(--t-small);
-  color: var(--gris-light);
-}
+.v1 .svc ul { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; font-size: var(--t-small); color: var(--gris); margin-top: 0.3rem; }
+.v1 .svc li + li::before { content: "· "; }
 
-.v1 .service-detail li + li::before {
-  content: "· ";
-}
-
-@media (min-width: 58rem) {
-  .v1 .service {
-    grid-template-columns: 4rem 1fr 1fr;
-    gap: 2.5rem;
-    align-items: baseline;
-  }
-  .v1 .service-detail {
-    justify-content: flex-end;
-    text-align: right;
-  }
+@media (min-width: 44rem) { .v1 .svc { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 68rem) {
+  .v1 .svc { grid-template-columns: repeat(4, 1fr); }
+  /* Gentle vertical stagger so the row isn't four identical blocks. */
+  .v1 .svc article:nth-child(even) { transform: translateY(1.5rem); }
+  .v1 .svc article:nth-child(even):hover { transform: translateY(calc(1.5rem - 2px)); }
 }
 
 /* ---------- b2b ---------- */
 
-.v1 .b2b {
-  background: var(--sable);
-  color: var(--encre);
-}
+.v1 .b2b { background: var(--sable); }
 
-.v1 .b2b-grid {
-  display: grid;
-  gap: clamp(2rem, 5vw, 4rem);
-  align-items: start;
-}
+.v1 .b2b-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
 
 .v1 .b2b-media {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--round);
   overflow: hidden;
 }
 
-.v1 .b2b-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.v1 .b2b-media img { width: 100%; height: 100%; object-fit: cover; }
 
-.v1 .b2b-points {
-  display: grid;
-  gap: 1.6rem;
-  margin-top: 2.25rem;
-}
+.v1 .b2b-list { display: grid; gap: 1.25rem; margin-top: 1.75rem; }
 
-.v1 .b2b-point {
-  display: grid;
-  gap: 0.4rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--rule-strong);
-}
+.v1 .b2b-list > div { display: grid; gap: 0.3rem; }
 
-.v1 .b2b-point h3 {
-  font-size: var(--t-small);
-  letter-spacing: 0.06em;
-  font-weight: 600;
-}
+.v1 .b2b-list h3 { font-family: var(--display); font-weight: 600; font-size: 1.05rem; }
+.v1 .b2b-list p { color: var(--gris); font-size: var(--t-small); line-height: 1.6; max-width: 42ch; }
 
-.v1 .b2b-point p {
-  color: var(--gris);
-  font-size: var(--t-small);
-  line-height: 1.65;
-  max-width: 44ch;
-}
-
-@media (min-width: 62rem) {
-  .v1 .b2b-grid {
-    grid-template-columns: 0.85fr 1.15fr;
-  }
-}
+@media (min-width: 58rem) { .v1 .b2b-grid { grid-template-columns: 1fr 1fr; } }
 
 /* ---------- software ---------- */
 
-.v1 .soft {
-  display: grid;
-  border-top: 1px solid var(--rule-strong);
-}
+.v1 .soft { display: grid; gap: 0; }
 
-.v1 .soft-row {
+.v1 .soft > div {
   display: grid;
   gap: 0.3rem;
-  padding-block: 1.35rem;
-  border-bottom: 1px solid var(--rule);
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--line);
 }
 
-.v1 .soft-name {
-  font-family: var(--serif);
-  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.35rem);
-  line-height: 1.1;
-}
+.v1 .soft > div:first-child { border-top: 1px solid var(--line); }
 
-.v1 .soft-use {
-  color: var(--gris);
-  font-size: var(--t-small);
-}
+.v1 .soft-n { font-family: var(--display); font-weight: 600; font-size: clamp(1.3rem, 1.05rem + 1.1vw, 2rem); line-height: 1.1; }
+.v1 .soft-u { color: var(--gris); font-size: var(--t-small); }
 
 @media (min-width: 48rem) {
-  .v1 .soft-row {
-    grid-template-columns: 1fr 1.4fr;
-    gap: 2rem;
-    align-items: baseline;
-  }
+  .v1 .soft > div { grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: baseline; }
 }
 
 /* ---------- contact ---------- */
 
-.v1 .contact {
+.v1 .contact { position: relative; overflow: hidden; }
+
+.v1 .contact-card {
   position: relative;
+  border-radius: clamp(16px, 3vw, 28px);
   overflow: hidden;
-  background: var(--encre);
   color: var(--os);
-}
-
-.v1 .contact-media {
-  position: absolute;
-  inset: 0;
-}
-
-.v1 .contact-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.26;
-}
-
-.v1 .contact-inner {
-  position: relative;
-  z-index: 1;
+  padding: clamp(2.25rem, 6vw, 5rem);
   display: grid;
-  gap: 1.75rem;
+  gap: 1.35rem;
   justify-items: start;
 }
 
-.v1 .contact h2 {
-  font-family: var(--serif);
-  font-size: var(--t-h2);
-  max-width: 16ch;
-  text-wrap: balance;
+.v1 .contact-card > img,
+.v1 .contact-card .contact-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
 }
 
-.v1 .contact p {
-  max-width: 46ch;
-  color: color-mix(in oklab, var(--os) 82%, transparent);
-  line-height: 1.7;
+.v1 .contact-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    oklch(24% 0.016 58 / 0.88) 0%,
+    oklch(24% 0.016 58 / 0.62) 62%,
+    oklch(24% 0.016 58 / 0.42) 100%
+  );
+  z-index: -1;
 }
+
+.v1 .contact-card h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--t-h2);
+  line-height: 1.08;
+  max-width: 15ch;
+}
+
+.v1 .contact-card p { max-width: 44ch; color: color-mix(in oklab, var(--os) 86%, transparent); line-height: 1.75; }
 
 /* ---------- footer ---------- */
 
 .v1 .foot {
-  background: var(--encre);
-  color: color-mix(in oklab, var(--os) 74%, transparent);
-  padding-block: clamp(2.5rem, 5vw, 4rem);
+  background: var(--sable);
+  padding-block: clamp(2.25rem, 5vw, 4rem);
   font-size: var(--t-small);
-  border-top: 1px solid color-mix(in oklab, var(--os) 14%, transparent);
+  color: var(--encre-2);
 }
 
-.v1 .foot-grid {
-  display: grid;
-  gap: 2rem;
-}
+.v1 .foot-grid { display: grid; gap: 2rem; }
 
-.v1 .foot-grid h3 {
+.v1 .foot h3 {
   font-size: var(--t-label);
-  letter-spacing: 0.18em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--os) 52%, transparent);
-  margin-bottom: 0.75rem;
-  font-weight: 500;
+  color: var(--gris);
+  margin-bottom: 0.65rem;
+  font-weight: 600;
 }
 
-.v1 .foot a:hover {
-  color: var(--os);
-}
+.v1 .foot a:hover { color: var(--argile); }
 
 .v1 .foot-base {
-  margin-top: clamp(2rem, 4vw, 3rem);
-  padding-top: 1.5rem;
-  border-top: 1px solid color-mix(in oklab, var(--os) 12%, transparent);
+  margin-top: clamp(1.75rem, 4vw, 3rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
   display: grid;
-  gap: 0.75rem;
-  color: color-mix(in oklab, var(--os) 55%, transparent);
+  gap: 0.6rem;
+  color: var(--gris);
   font-size: 0.8rem;
 }
 
 @media (min-width: 48rem) {
-  .v1 .foot-grid {
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 3rem;
-  }
-  .v1 .foot-base {
-    grid-template-columns: 1fr auto;
-    align-items: center;
-  }
+  .v1 .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; }
+  .v1 .foot-base { grid-template-columns: 1fr auto; align-items: center; }
 }

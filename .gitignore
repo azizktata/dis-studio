@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Client source deliverables: ~103MB of PDFs that the site is built *from*,
+# not served. Committing them made `git push` fail with HTTP 408 and would trip
+# GitHub's file-size limits. The images the site actually uses are extracted
+# into public/projets/ by scripts/extract-pdf-images.mjs and committed there.
+/public/DIS STUDIO/

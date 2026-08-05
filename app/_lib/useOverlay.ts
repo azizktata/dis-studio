@@ -21,8 +21,13 @@ export function useOverlay(open: boolean, onClose: () => void) {
 
     const node = ref.current;
     const first = node?.querySelector<HTMLElement>(FOCUSABLE);
-    // Defer so the element exists and any entrance transition has started.
-    const raf = requestAnimationFrame(() => first?.focus());
+    /*
+     * Defer so the element exists and any entrance transition has started.
+     * `preventScroll` matters: focusing without it makes the browser scroll the
+     * target into view, which snaps a scrolled panel back to the top and reads
+     * as a flicker.
+     */
+    const raf = requestAnimationFrame(() => first?.focus({ preventScroll: true }));
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -41,12 +46,13 @@ export function useOverlay(open: boolean, onClose: () => void) {
       const lastItem = items[items.length - 1];
       const active = document.activeElement;
 
+      // preventScroll on the wrap-around too, for the same reason as above.
       if (event.shiftKey && (active === firstItem || !node.contains(active))) {
         event.preventDefault();
-        lastItem.focus();
+        lastItem.focus({ preventScroll: true });
       } else if (!event.shiftKey && active === lastItem) {
         event.preventDefault();
-        firstItem.focus();
+        firstItem.focus({ preventScroll: true });
       }
     };
 
