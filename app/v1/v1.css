@@ -411,7 +411,9 @@
 
 /* A button, so the card opens the lightbox and is keyboard reachable. */
 .v1 .card {
-  flex: 0 0 clamp(16rem, 68vw, 24rem);
+  /* 82vw on a phone: one card reads as the subject with the next peeking in,
+     rather than 68vw which left an awkward sliver mid-title. */
+  flex: 0 0 clamp(16rem, 82vw, 24rem);
   scroll-snap-align: start;
   display: grid;
   gap: 0.85rem;
@@ -437,13 +439,21 @@
   color: var(--argile);
 }
 
+/*
+  Landscape on phones. A 4:5 frame at 82vw is ~400px tall, which pushed the
+  title below the fold and made each card fill the screen on its own.
+*/
 .v1 .card-frame {
   position: relative;
   display: block;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
   border-radius: var(--round);
   overflow: hidden;
   background: var(--sable);
+}
+
+@media (min-width: 48rem) {
+  .v1 .card-frame { aspect-ratio: 4 / 5; }
 }
 
 .v1 .card-frame img {
