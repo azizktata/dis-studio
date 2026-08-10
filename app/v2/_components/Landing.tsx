@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import {
   ambience,
   b2b,
-  photoCredit,
   projects,
   services,
   software,
@@ -66,8 +65,8 @@ export default function Landing() {
         <nav className="nav-links" aria-label="Principale">
           <a href="#realisations">Réalisations</a>
           <a href="#galerie">Galerie</a>
-          <a href="#services">Services</a>
-          <a href="#studios">Pour les studios</a>
+          <a href="#services">Processus</a>
+          <a href="#studios">Partenaire technique</a>
           <a href="#contact">Contact</a>
         </nav>
         <div className="nav-actions">
@@ -110,15 +109,12 @@ export default function Landing() {
           <div className="shell hero-inner">
             <div>
               <h1 className="serif hero-title">
-                Des intérieurs pensés <em>jusqu’au dernier trait</em>
+                {studio.heroTitle} <em>{studio.heroTitleAccent}</em>
               </h1>
             </div>
 
             <div className="hero-foot">
-              <p className="hero-blurb">
-                Studio de design d’intérieur et partenaire de production pour les
-                studios qui ont besoin de capacité.
-              </p>
+              <p className="hero-blurb">{studio.heroLede}</p>
               <div className="hero-actions">
                 <button className="cta" onClick={() => setWizard(true)}>
                   Démarrer un projet
@@ -144,7 +140,7 @@ export default function Landing() {
                 onClick={() => setTrack("clients")}
               >
                 <span className="seg-index">01</span>
-                <span className="seg-name">Particuliers &amp; entreprises</span>
+                <span className="seg-name">Projets directs</span>
               </button>
               <button
                 role="tab"
@@ -153,7 +149,7 @@ export default function Landing() {
                 onClick={() => setTrack("studios")}
               >
                 <span className="seg-index">02</span>
-                <span className="seg-name">Studios de design</span>
+                <span className="seg-name">Firmes &amp; cabinets</span>
               </button>
             </div>
           </div>
@@ -163,29 +159,30 @@ export default function Landing() {
         <section className="section shell">
           <div className="intro-grid">
             <p className="label" data-reveal>
-              {forStudios ? "Partenaire de production" : "Le studio"}
+              {forStudios ? "Partenaire technique" : "L’équipe"}
             </p>
             <div className="intro-body">
               {/* The positioning statement is this section's heading — keeps
                   h1 → h2 → h3 sequential for screen readers. */}
               <h2 className="lede serif" data-reveal style={{ lineHeight: 1.3 }}>
                 {forStudios
-                  ? "Nous produisons pour d’autres studios, à vos gabarits et sous votre nom."
+                  ? "Nous produisons pour d’autres équipes de conception, à vos gabarits et sous votre nom."
                   : studio.positioning}
               </h2>
               <div className="intro-tracks">
                 <div className="track" data-reveal data-delay="1">
                   <h3>Conception</h3>
                   <p>
-                    Concept, aménagement, matières. Le projet prend forme avant
-                    d’exister, jusqu’aux plans que vos entreprises pourront suivre.
+                    Concept, aménagement et matières, jusqu’aux plans que vos
+                    équipes et vos entrepreneurs peuvent suivre sans
+                    interprétation.
                   </p>
                 </div>
                 <div className="track" data-reveal data-delay="2">
-                  <h3>Production</h3>
+                  <h3>Dessin technique &amp; 3D</h3>
                   <p>
-                    Une équipe de dessin et de modélisation à Tunis, rompue aux
-                    dossiers techniques et aux délais courts.
+                    Plans cotés, modélisation et rendus produits à vos gabarits,
+                    livrés en fichiers sources exploitables.
                   </p>
                 </div>
               </div>
@@ -284,7 +281,7 @@ export default function Landing() {
         {/* ---------- services ---------- */}
         <section className="section shell" id="services">
           <div className="sec-head">
-            <h2 data-reveal>Ce que nous faisons</h2>
+            <h2 data-reveal>Notre processus de collaboration</h2>
           </div>
           <div className="services">
             {services.map((s) => (
@@ -308,9 +305,11 @@ export default function Landing() {
         <section className="section b2b" id="studios">
           <div className="shell b2b-grid">
             <div className="b2b-media" data-reveal>
+            {/* Real DIS Studio work, not stock. A finished render rather than
+                a dimensioned sheet: the drawings read as busy at this size. */}
               <Image
-                src={ambience.atelierDessin.src}
-                alt={ambience.atelierDessin.alt}
+                src="/projets/villa-contemporaine/03.jpg"
+                alt="Séjour livré : conception, plans techniques et rendus 3D réalisés par DIS Studio"
                 fill
                 sizes="(min-width: 62rem) 38vw, 92vw"
                 style={{ objectFit: "cover" }}
@@ -338,9 +337,15 @@ export default function Landing() {
                   </div>
                 ))}
               </div>
+              {/* Typeset as ruled lines — never pills. */}
+              <ul className="b2b-reasons" data-reveal>
+                {b2b.reasons.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
               <p style={{ marginTop: "2rem" }}>
                 <button className="cta" onClick={() => setWizard(true)}>
-                  Demander une capacité
+                  Demander une soumission
                   <ArrowRight className="arrow" />
                 </button>
               </p>
@@ -384,7 +389,7 @@ export default function Landing() {
             <h2 data-reveal>Dites-nous où vous en êtes</h2>
             <p data-reveal>
               Quelques questions adaptées à votre projet, et nous revenons vers vous
-              sous 24 h ouvrées avec une première lecture.
+              rapidement avec une première lecture.
             </p>
             <button className="cta" onClick={() => setWizard(true)} data-reveal>
               Ouvrir le formulaire
@@ -421,10 +426,10 @@ export default function Landing() {
                   <a href="#realisations">Réalisations</a>
                 </li>
                 <li>
-                  <a href="#services">Services</a>
+                  <a href="#services">Processus</a>
                 </li>
                 <li>
-                  <a href="#studios">Pour les studios</a>
+                  <a href="#studios">Partenaire technique</a>
                 </li>
                 <li>
                   <button onClick={() => setPortal(true)}>Espace client</button>

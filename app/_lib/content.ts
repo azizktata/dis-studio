@@ -319,34 +319,58 @@ export type Service = {
   detail: string[];
 };
 
+/*
+ * The four steps of the collaboration, as supplied by the client. Same shape as
+ * before, so both versions render them without any component change.
+ */
 export const services: Service[] = [
   {
     index: "01",
-    title: "Design & conception",
+    title: "Analyse & prise de brief",
     summary:
-      "Le projet dans son ensemble, de la première intention spatiale à la sélection des matières.",
-    detail: ["Étude d'ambiance", "Plans d'aménagement", "Choix des matériaux"],
+      "Nous recueillons les besoins, les objectifs et les contraintes afin de bien comprendre le projet.",
+    detail: [
+      "Rencontre découverte",
+      "Analyse des besoins",
+      "Cahier des charges",
+      "Validation des objectifs",
+    ],
   },
   {
     index: "02",
-    title: "Production 2D",
+    title: "Conception & production",
     summary:
-      "Plans techniques précis, cotés et prêts pour le chantier ou l'atelier.",
-    detail: ["Plans de masse", "Coupes & façades", "Calepinage"],
+      "Le projet est confié au designer le plus qualifié de l'équipe, qui transforme les idées en solutions techniques et créatives.",
+    detail: [
+      "Conception sur mesure",
+      "Plans techniques 2D",
+      "Modélisation 3D",
+      "Choix des matériaux",
+    ],
   },
   {
     index: "03",
-    title: "Visualisation 3D",
+    title: "Révision & validation",
     summary:
-      "Modélisation et rendus qui rendent l'espace lisible avant qu'il existe.",
-    detail: ["Modélisation", "Rendus d'ambiance", "Vues produit"],
+      "Chaque proposition est vérifiée par DIS Studio, puis présentée. Les ajustements se poursuivent jusqu'à une solution conforme aux attentes.",
+    detail: [
+      "Contrôle qualité",
+      "Présentation au client",
+      "Modifications",
+      "Validation finale",
+    ],
   },
   {
     index: "04",
-    title: "Documentation technique",
+    title: "Livraison & accompagnement",
     summary:
-      "Le dossier complet que vos équipes et vos entreprises peuvent suivre sans interprétation.",
-    detail: ["Dossier d'exécution", "Détails de mobilier", "Nomenclatures"],
+      "Nous livrons un dossier complet, prêt pour l'entreprise, l'atelier ou le chantier, et restons disponibles pour le suivi.",
+    detail: [
+      "Plans d'exécution",
+      "Dossier technique complet",
+      "Rendus finaux",
+      "Assistance et suivi",
+    ],
   },
 ];
 
@@ -364,32 +388,48 @@ export const software: Software[] = [
 
 export const studio = {
   name: "DIS Studio",
-  tagline: "Studio de design d'intérieur",
+  /* « DIS Studio » is the brand; everywhere else the copy says what we do. */
+  tagline: "Conception, dessin technique et modélisation 3D",
   positioning:
-    "DIS Studio conçoit des intérieurs réfléchis, du premier concept aux dessins prêts pour la production, et accompagne les studios de design comme partenaire de production à distance.",
+    "DIS Studio prend en charge la conception, le dessin technique et la modélisation 3D des firmes de design, cabinets d'architecture et fabricants de mobilier, comme une extension de leur équipe.",
+  /* Hero copy lives here: the client has revised it twice, so one source. */
+  heroTitle: "Vous concevez.",
+  heroTitleAccent: "Nous donnons vie à vos projets.",
+  heroLede:
+    "Conception, dessin technique et modélisation 3D pour les firmes de design, cabinets d'architecture et fabricants de mobilier.",
   location: "Tunis, Tunisie",
   email: "contact@disstudio.tn",
-  since: "2026",
+  /* Earliest delivered project. Must never post-date the portfolio. */
+  since: "2022",
 };
 
 export const b2b = {
-  title: "Pour les studios de design",
+  title: "Pour les professionnels de l'aménagement",
   /* Short enough to hold two lines at the display size. */
-  lede: "Votre atelier de production, à la demande",
-  body: "Nous travaillons en renfort de studios, d'architectes et de fabricants : modélisation, mise au net et documentation technique livrées à vos standards, sous votre nom.",
+  lede: "Une équipe de conception qui renforce la vôtre",
+  body: "DIS Studio accompagne les firmes de design, les cabinets d'architecture, les fabricants de mobilier et les entreprises d'aménagement en prenant en charge une partie ou la totalité de leurs besoins en conception, dessin technique et modélisation 3D. Nous agissons comme une extension de votre équipe, pour livrer vos projets plus rapidement sans embaucher.",
   points: [
     {
-      title: "Sous votre nom",
-      body: "Les livrables partent à vos gabarits et à votre charte. Nous restons en retrait.",
+      title: "Une collaboration discrète et confidentielle",
+      body: "Vous demeurez le seul point de contact avec votre client. Tout est produit selon vos standards, vos méthodes et votre image de marque.",
     },
     {
-      title: "Fuseau utile",
-      body: "Basés à Tunis, nous travaillons à cheval sur les horaires européens : vos retours partent avant votre journée.",
+      title: "Des livrables prêts à être utilisés",
+      body: "Plans techniques 2D, modélisation et rendus 3D, plans de fabrication, détails de mobilier sur mesure et documentation technique, directement exploitables par vos équipes et vos entrepreneurs.",
     },
     {
-      title: "Volume absorbé",
-      body: "Une planche isolée ou un dossier complet, sans réorganiser votre équipe.",
+      title: "Une solution flexible selon vos besoins",
+      body: "D'un seul dessin au développement complet d'un projet, nous ajustons notre capacité à votre charge de travail.",
     },
+  ],
+  /* Typeset as a ruled list, never as pills. ✓ is a text marker, not an emoji. */
+  reasonsTitle: "Pourquoi choisir DIS Studio",
+  reasons: [
+    "Augmentez votre capacité de production sans recruter.",
+    "Respectez vos échéanciers, même en période de pointe.",
+    "Confiez vos projets à une équipe spécialisée en design et en documentation technique.",
+    "Recevez des livrables professionnels, conformes à vos exigences.",
+    "Travaillez avec un partenaire qui s'intègre à votre façon de travailler.",
   ],
 };
 
@@ -421,8 +461,8 @@ export const intakeServices: {
   },
   {
     key: "b2b",
-    label: "Renfort studio (B2B)",
-    hint: "Capacité de production pour un studio ou un fabricant",
+    label: "Partenaire technique (B2B)",
+    hint: "Capacité de conception pour une firme de design ou un fabricant",
   },
 ];
 
@@ -528,12 +568,16 @@ export const chatIntro =
 
 export const chatScript: { q: string; a: string }[] = [
   {
-    q: "Quels sont vos délais pour des rendus 3ds Max ?",
-    a: "Pour une vue d'ambiance, comptez 3 à 5 jours ouvrés après validation du modèle. Un ensemble de 5 à 6 vues se livre généralement en 8 à 10 jours. Les projets urgents peuvent être replanifiés : dites-le nous dans votre demande.",
+    /*
+     * No fixed turnaround here on purpose: DIS Studio has not committed to an
+     * SLA, and a promise the team can miss costs more than a careful answer.
+     */
+    q: "Quels sont vos délais pour des rendus 3D ?",
+    a: "Le délai dépend du nombre de vues, de la complexité du modèle et de l'état des fichiers de départ. Nous confirmons un échéancier précis à la réception de votre demande, et nous replanifions volontiers les projets urgents.",
   },
   {
-    q: "Comment fonctionne la sous-traitance pour les studios ?",
-    a: "Vous nous transmettez vos gabarits et vos références ; nous produisons à votre charte et vous livrons des fichiers sources exploitables. Les livrables partent sous votre nom. Nous pouvons prendre une planche isolée comme un dossier d'exécution complet.",
+    q: "Comment fonctionne la collaboration avec les firmes de design ?",
+    a: "Vous nous transmettez vos gabarits et vos références ; nous produisons à votre charte et vous livrons des fichiers sources exploitables. Les livrables partent sous votre nom, et vous demeurez le seul point de contact avec votre client. Nous prenons aussi bien une planche isolée qu'un dossier d'exécution complet.",
   },
   {
     q: "Puis-je suivre mon projet en ligne ?",
@@ -542,7 +586,7 @@ export const chatScript: { q: string; a: string }[] = [
 ];
 
 export const chatFallback =
-  "Je n'ai pas la réponse à celle-là. Écrivez-nous à contact@disstudio.tn ou ouvrez une demande. Nous revenons vers vous sous 24 h ouvrées.";
+  "Je n'ai pas la réponse à celle-là. Écrivez-nous à contact@disstudio.tn ou ouvrez une demande : nous revenons vers vous rapidement.";
 
 export const photoCredit =
   "Photographies d'ambiance : Unsplash. Les projets présentés dans le portfolio sont des réalisations DIS Studio.";

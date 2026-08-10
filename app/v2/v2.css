@@ -396,7 +396,8 @@
 
 .v2 .hero-title {
   font-size: var(--t-display);
-  max-width: 15ch;
+  /* Two full sentences now — 15ch broke them mid-clause. */
+  max-width: 26ch;
   text-wrap: balance;
 }
 
@@ -825,16 +826,15 @@
   line-height: 1.65;
 }
 
+/*
+  One item per line. As an inline dot-separated run these wrapped mid-list and
+  left orphaned "·" opening a line, which read as a rendering fault.
+*/
 .v2 .service-detail {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem 1.1rem;
+  display: grid;
+  gap: 0.3rem;
   font-size: var(--t-small);
   color: var(--gris-light);
-}
-
-.v2 .service-detail li + li::before {
-  content: "· ";
 }
 
 @media (min-width: 58rem) {
@@ -844,12 +844,37 @@
     align-items: baseline;
   }
   .v2 .service-detail {
-    justify-content: flex-end;
+    justify-items: end;
     text-align: right;
   }
 }
 
 /* ---------- b2b ---------- */
+
+/* Ruled lines with a typographic check — deliberately not pills. */
+.v2 .b2b-reasons {
+  display: grid;
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.v2 .b2b-reasons li {
+  display: grid;
+  grid-template-columns: 1.35rem 1fr;
+  gap: 0.5rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--t-small);
+  color: var(--encre-soft);
+  line-height: 1.5;
+}
+
+.v2 .b2b-reasons li::before {
+  content: "✓";
+  color: var(--argile);
+  font-size: 0.85em;
+  line-height: 1.7;
+}
 
 .v2 .b2b {
   background: var(--sable);
@@ -864,8 +889,15 @@
 
 .v2 .b2b-media {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+}
+
+/* Same reason as v1: a landscape source must not be stretched into a tall
+   slot, or object-fit crops it to a sliver and it looks pixelated. */
+@media (min-width: 62rem) {
+  .v2 .b2b-grid { align-items: start; }
+  .v2 .b2b-media { position: sticky; top: calc(var(--nav-h) + 2rem); }
 }
 
 .v2 .b2b-media img {

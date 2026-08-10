@@ -12,7 +12,6 @@ import VersionSwitch from "../../_components/VersionSwitch";
 import {
   ambience,
   b2b,
-  photoCredit,
   projects,
   services,
   software,
@@ -71,8 +70,8 @@ export default function Landing() {
         <nav className="nav-links" aria-label="Principale">
           <a href="#projets">Projets</a>
           <a href="#galerie">Galerie</a>
-          <a href="#services">Services</a>
-          <a href="#studios">Pour les studios</a>
+          <a href="#services">Processus</a>
+          <a href="#studios">Partenaire technique</a>
           <a href="#contact">Contact</a>
         </nav>
         <div className="nav-actions">
@@ -116,12 +115,9 @@ export default function Landing() {
               {studio.location} · Depuis {studio.since}
             </p> */}
             <h1 className="disp">
-              Des lieux où l’on se sent <em>chez soi</em>
+              {studio.heroTitle} <em>{studio.heroTitleAccent}</em>
             </h1>
-            <p className="hero-lede">
-              Concept, aménagement et matières : nous dessinons des intérieurs
-              chaleureux, jusqu’aux plans que vos entreprises pourront suivre.
-            </p>
+            <p className="hero-lede">{studio.heroLede}</p>
             <div className="hero-actions">
               <button className="cta" onClick={() => setWizard(true)}>
                 Parler de mon projet
@@ -165,28 +161,28 @@ export default function Landing() {
             </div>
             <div>
               <p className="label" data-reveal>
-                Le studio
+                L’équipe
               </p>
               {/* Serves as this section's heading — keeps h1 → h2 → h3 sequential. */}
               <h2 className="intro-lede" data-reveal style={{ marginTop: "1rem" }}>
-                Un intérieur réussi se remarque à peine. Il se vit.
+                Une équipe de conception qui devient une extension de la vôtre.
               </h2>
               <p className="prose" data-reveal style={{ marginTop: "1.25rem" }}>
                 {studio.positioning}
               </p>
               <div className="intro-cols">
                 <div data-reveal data-delay="1">
-                  <h3>Pour vous</h3>
+                  <h3>Pour les firmes &amp; cabinets</h3>
                   <p>
-                    Maisons, appartements, restaurants et bureaux, du concept
-                    jusqu’au chantier, avec un interlocuteur unique.
+                    Plans techniques, modélisation et documentation produits à
+                    vos gabarits et livrés sous votre nom.
                   </p>
                 </div>
                 <div data-reveal data-delay="2">
-                  <h3>Pour les studios</h3>
+                  <h3>Pour les projets directs</h3>
                   <p>
-                    Une équipe de production à Tunis qui prend le relais sur vos
-                    dossiers techniques, à vos gabarits.
+                    Résidences, commerces et bureaux, du concept jusqu’au
+                    chantier, avec un interlocuteur unique.
                   </p>
                 </div>
               </div>
@@ -286,7 +282,7 @@ export default function Landing() {
         {/* ---------- services ---------- */}
         <section className="section shell" id="services">
           <div className="sec-head">
-            <h2 data-reveal>Comment nous travaillons</h2>
+            <h2 data-reveal>Notre processus de collaboration</h2>
           </div>
           <div className="svc">
             {services.map((s, i) => (
@@ -329,17 +325,25 @@ export default function Landing() {
                   </div>
                 ))}
               </div>
+              {/* Typeset as ruled lines — never pills. */}
+              <ul className="b2b-reasons" data-reveal>
+                {b2b.reasons.map((r) => (
+                  <li key={r}>{r}</li>
+                ))}
+              </ul>
               <p style={{ marginTop: "1.9rem" }}>
                 <button className="cta" onClick={() => setWizard(true)}>
-                  Demander une capacité
+                  Demander une soumission
                   <ArrowRight className="arrow" />
                 </button>
               </p>
             </div>
+            {/* Real DIS Studio work, not stock. A finished render rather than
+                a dimensioned sheet: the drawings read as busy at this size. */}
             <div className="b2b-media" data-reveal>
               <Image
-                src={ambience.atelierDessin.src}
-                alt={ambience.atelierDessin.alt}
+                src="/projets/villa-contemporaine/03.jpg"
+                alt="Séjour livré : conception, plans techniques et rendus 3D réalisés par DIS Studio"
                 fill
                 sizes="(min-width: 58rem) 46vw, 92vw"
                 style={{ objectFit: "cover" }}
@@ -383,7 +387,7 @@ export default function Landing() {
             <h2>Racontez-nous votre lieu</h2>
             <p>
               Quelques questions adaptées à votre projet, et nous revenons vers
-              vous sous 24 h ouvrées avec une première lecture, sans engagement.
+              vous rapidement avec une première lecture, sans engagement.
             </p>
             <button className="cta" onClick={() => setWizard(true)}>
               Parler de mon projet
@@ -420,10 +424,10 @@ export default function Landing() {
                   <a href="#projets">Projets</a>
                 </li>
                 <li>
-                  <a href="#services">Services</a>
+                  <a href="#services">Processus</a>
                 </li>
                 <li>
-                  <a href="#studios">Pour les studios</a>
+                  <a href="#studios">Partenaire technique</a>
                 </li>
                 <li>
                   <button onClick={() => setPortal(true)}>Espace client</button>

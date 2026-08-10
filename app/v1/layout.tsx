@@ -19,9 +19,9 @@ const signika = Signika_Negative({
 });
 
 export const metadata: Metadata = {
-  title: "DIS Studio — Intérieurs chaleureux, pensés pour y vivre",
+  title: "DIS Studio — Conception, dessin technique et modélisation 3D",
   description:
-    "Studio de design d'intérieur : concept, aménagement, matières et suivi de projet. Résidentiel, hospitalité et espaces commerciaux.",
+    "Partenaire technique des firmes de design, cabinets d'architecture et fabricants de mobilier : conception, plans techniques 2D, modélisation et rendus 3D, documentation d'exécution.",
 };
 
 export default function V1Layout({ children }: LayoutProps<"/v1">) {

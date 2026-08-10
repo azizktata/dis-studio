@@ -20,9 +20,9 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "DIS Studio — Atelier de design d'intérieur",
+  title: "DIS Studio — Conception, dessin technique et modélisation 3D",
   description:
-    "Des intérieurs réfléchis, du premier concept aux dessins prêts pour la production. Studio de design d'intérieur entre Montréal et Tunis.",
+    "Partenaire technique des firmes de design, cabinets d'architecture et fabricants de mobilier : conception, plans techniques 2D, modélisation et rendus 3D, documentation d'exécution.",
 };
 
 export default function V2Layout({ children }: LayoutProps<"/v2">) {

@@ -68,7 +68,7 @@ export default function IntakeWizard({ open, onClose }: Props) {
             </span>
             <h3>Merci, {answers.name.split(" ")[0] || "à bientôt"}.</h3>
             <p className="prose">
-              Nous revenons vers vous sous 24 h ouvrées à l’adresse{" "}
+              Nous revenons vers vous rapidement à l’adresse{" "}
               <strong>{answers.email}</strong>.
               {answers.createAccount
                 ? " Votre espace client est prêt : vous y suivrez l’avancement et y retrouverez vos documents."

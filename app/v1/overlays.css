@@ -538,10 +538,13 @@
 
 .v1 .vswitch {
   position: fixed;
-  /* Clear of the Next dev badge (bottom-left) and the assistant (bottom-right). */
-  left: clamp(1rem, 3vw, 2rem);
-  bottom: clamp(4.25rem, 3vw + 3rem, 5.5rem);
-  z-index: 70;
+  /*
+    Top-right, tucked under the nav: bottom-left sat on top of the hero
+    sub-line, and bottom-right collides with the assistant trigger.
+  */
+  right: clamp(1rem, 3vw, 2rem);
+  top: calc(var(--nav-h) + 0.75rem);
+  z-index: 55;
   display: flex;
   background: color-mix(in oklab, var(--os) 90%, transparent);
   backdrop-filter: blur(10px);

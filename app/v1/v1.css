@@ -293,7 +293,8 @@
 
 .v1 .hero h1 {
   font-size: var(--t-display);
-  max-width: 14ch;
+  /* Two full sentences now — 14ch broke them mid-clause. */
+  max-width: 26ch;
   text-wrap: balance;
 }
 
@@ -609,20 +610,54 @@
 
 .v1 .svc p { color: var(--encre-2); font-size: var(--t-small); line-height: 1.6; }
 
-.v1 .svc ul { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; font-size: var(--t-small); color: var(--gris); margin-top: 0.3rem; }
-.v1 .svc li + li::before { content: "· "; }
+/*
+  One item per line. As an inline dot-separated run these wrapped mid-list and
+  left orphaned "·" opening a line, which read as a rendering fault.
+*/
+.v1 .svc ul {
+  display: grid;
+  gap: 0.35rem;
+  font-size: var(--t-small);
+  color: var(--gris);
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--line);
+}
 
 @media (min-width: 44rem) { .v1 .svc { grid-template-columns: 1fr 1fr; } }
 @media (min-width: 68rem) {
   .v1 .svc { grid-template-columns: repeat(4, 1fr); }
-  /* Gentle vertical stagger so the row isn't four identical blocks. */
-  .v1 .svc article:nth-child(even) { transform: translateY(1.5rem); }
-  .v1 .svc article:nth-child(even):hover { transform: translateY(calc(1.5rem - 2px)); }
 }
 
 /* ---------- b2b ---------- */
 
 .v1 .b2b { background: var(--sable); }
+
+/* Ruled lines with a typographic check — deliberately not pills. */
+.v1 .b2b-reasons {
+  display: grid;
+  gap: 0;
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.v1 .b2b-reasons li {
+  display: grid;
+  grid-template-columns: 1.35rem 1fr;
+  gap: 0.5rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--t-small);
+  color: var(--encre-2);
+  line-height: 1.5;
+}
+
+.v1 .b2b-reasons li::before {
+  content: "✓";
+  color: var(--argile);
+  font-size: 0.85em;
+  line-height: 1.7;
+}
 
 .v1 .b2b-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
 
@@ -631,6 +666,17 @@
   aspect-ratio: 4 / 3;
   border-radius: var(--round);
   overflow: hidden;
+}
+
+/*
+  The sources are landscape (~1440x1080). Stretching this slot to match the
+  taller text column cropped them into a portrait sliver and magnified the
+  remainder, which read as pixelation. Keep the native ratio and pin the image
+  to the top of its column instead.
+*/
+@media (min-width: 58rem) {
+  .v1 .b2b-grid { align-items: start; }
+  .v1 .b2b-media { position: sticky; top: calc(var(--nav-h) + 2rem); }
 }
 
 .v1 .b2b-media img { width: 100%; height: 100%; object-fit: cover; }
