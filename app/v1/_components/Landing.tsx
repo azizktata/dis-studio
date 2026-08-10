@@ -149,8 +149,8 @@ export default function Landing() {
         <section className="section shell">
           <div className="intro-grid">
             <div className="intro-media" data-reveal>
-              {/* An architectural overview reads as "studio", where a bedroom
-                  detail read as decoration. */}
+              {/* An architectural overview reads as "équipe de conception";
+                  the slot is 3:2 to match this source without cropping. */}
               <Image
                 src={ambience.archiVerriere.src}
                 alt={ambience.archiVerriere.alt}
@@ -338,12 +338,12 @@ export default function Landing() {
                 </button>
               </p>
             </div>
-            {/* Real DIS Studio work, not stock. A finished render rather than
-                a dimensioned sheet: the drawings read as busy at this size. */}
+            {/* Collaboration over technical drawings — the section is about
+                partnership, and the dimensioned sheets read as busy here. */}
             <div className="b2b-media" data-reveal>
               <Image
-                src="/projets/villa-contemporaine/03.jpg"
-                alt="Séjour livré : conception, plans techniques et rendus 3D réalisés par DIS Studio"
+                src={ambience.atelierDessin.src}
+                alt={ambience.atelierDessin.alt}
                 fill
                 sizes="(min-width: 58rem) 46vw, 92vw"
                 style={{ objectFit: "cover" }}

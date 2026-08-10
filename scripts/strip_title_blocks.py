@@ -37,15 +37,20 @@ SHEETS = [
     ("plans-habitation/01.jpg", 0.052),
     ("plans-habitation/02.jpg", 0.060),
     ("plans-habitation/03.jpg", 0.050),
-    ("maison-de-culture/01.jpg", 0.050),
-    ("maison-de-culture/02.jpg", 0.062),
-    ("maison-de-culture/03.jpg", 0.096),
+    ("maison-de-culture/01.jpg", 0.049),
+    ("maison-de-culture/02.jpg", 0.071),
     # SketchUp dossier sheets — taller block with the firm's contact details.
     ("dossier-chambre/01.jpg", 0.120),
     ("dossier-cuisine/01.jpg", 0.140),
     ("dossier-dressing/01.jpg", 0.150),
     ("dossier-sdb/01.jpg", 0.142),
 ]
+
+# Deliberately NOT stripped: `maison-de-culture/03.jpg` (COUPE AA) is a bare
+# section on a blank page with no cartouche. A rule detector flags its ground
+# line at ~0.096 and cropping there ate the whole lower storey — which is why
+# every band above is confirmed by eye, not by the detector.
+NO_TITLE_BLOCK = ("maison-de-culture/03.jpg",)
 
 # Fraction inset to clear the printed border before trimming to ink.
 FRAME_INSET = 0.045
@@ -72,12 +77,39 @@ def trim_to_ink(img, pad=24, threshold=170, min_frac=0.006):
     )
 
 
+# Records which files have been processed. The crop is destructive in place,
+# so without this a second run silently eats a second band out of a drawing
+# that no longer has a title block. Content-sniffing proved unreliable here —
+# an explicit ledger is the honest mechanism.
+STAMP = os.path.join(OUT, ".title-blocks-stripped")
+
+
+def load_stamp():
+    if not os.path.exists(STAMP):
+        return set()
+    with open(STAMP, encoding="utf-8") as fh:
+        return {line.strip() for line in fh if line.strip()}
+
+
+def save_stamp(done):
+    with open(STAMP, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(sorted(done)) + "\n")
+
+
 def main():
     dry = "--dry-run" in sys.argv
+    force = "--force" in sys.argv
+    done = set() if force else load_stamp()
+    processed = set(done)
+
     for rel, band in SHEETS:
         path = os.path.join(OUT, rel.replace("/", os.sep))
         if not os.path.exists(path):
             print(f"  MISSING  {rel}")
+            continue
+
+        if rel in done:
+            print(f"  SKIP (already stripped)  {rel}")
             continue
 
         img = Image.open(path).convert("RGB")
@@ -102,8 +134,14 @@ def main():
         )
         if not dry:
             img.save(path, quality=86, optimize=True, progressive=True)
+            processed.add(rel)
 
-    print("\ndry run, nothing written" if dry else "\ndone")
+    if dry:
+        print("\ndry run, nothing written")
+        return
+
+    save_stamp(processed)
+    print("\ndone — re-render the sheets first, then --force, to redo a crop")
 
 
 if __name__ == "__main__":

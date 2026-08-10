@@ -305,11 +305,11 @@ export default function Landing() {
         <section className="section b2b" id="studios">
           <div className="shell b2b-grid">
             <div className="b2b-media" data-reveal>
-            {/* Real DIS Studio work, not stock. A finished render rather than
-                a dimensioned sheet: the drawings read as busy at this size. */}
+            {/* Collaboration over technical drawings — the section is about
+                partnership, and the dimensioned sheets read as busy here. */}
               <Image
-                src="/projets/villa-contemporaine/03.jpg"
-                alt="Séjour livré : conception, plans techniques et rendus 3D réalisés par DIS Studio"
+                src={ambience.atelierDessin.src}
+                alt={ambience.atelierDessin.alt}
                 fill
                 sizes="(min-width: 62rem) 38vw, 92vw"
                 style={{ objectFit: "cover" }}

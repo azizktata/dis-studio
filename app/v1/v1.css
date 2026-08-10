@@ -343,9 +343,11 @@
 
 .v1 .intro-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
 
+/* 3:2 to match the source. A 5:6 portrait slot cropped the landscape
+   original to a sliver and magnified it, which read as pixelation. */
 .v1 .intro-media {
   position: relative;
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 3 / 2;
   border-radius: var(--round);
   overflow: hidden;
 }
