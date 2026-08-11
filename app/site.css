@@ -1,0 +1,957 @@
+/*
+  DIS Studio — brand identity.
+
+  Warm Greige, Champagne Gold and Obsidian Black, set in Montserrat. Built on
+  modern architecture and luxury interiors: geometric precision, generous
+  space, restraint.
+
+  One contrast rule governs the whole palette. Champagne Gold is a mid-tone:
+  on Obsidian it is 7.08:1, but on Greige it is only 2.18:1 — well under the
+  4.5:1 needed for text. So gold fills and gold-on-dark are used freely, and
+  small gold text on a light ground always uses --gold-deep (4.89:1, same hue
+  family). Nothing here should ever set --gold as text on --greige.
+
+  Every colour is a token so a dark theme can be added later as a second block
+  rather than a rewrite.
+*/
+
+.site {
+  /* Brand */
+  --greige: #f4f1ea;
+  --obsidian: #1a1a1a;
+  --gold: #c5a059;
+
+  /* Derived */
+  --greige-2: oklch(93.5% 0.008 80); /* raised panels */
+  --greige-3: oklch(89% 0.011 80); /* hairline fills */
+  --ink: var(--obsidian);
+  --ink-2: oklch(38% 0.004 70); /* secondary text, 8.0:1 on greige */
+  --ink-3: oklch(50% 0.005 70); /* muted text, 4.8:1 on greige */
+  --gold-deep: #806527; /* gold as text on light — 4.89:1 */
+  --gold-soft: color-mix(in oklab, var(--gold) 28%, transparent);
+  --line: color-mix(in oklab, var(--obsidian) 14%, transparent);
+
+  /*
+    Aliases so the existing rules keep working. The brand names above are the
+    source of truth; these map the old vocabulary onto it.
+  */
+  --os: var(--greige);
+  --sable: var(--greige-2);
+  --sable-2: var(--greige-3);
+  --encre: var(--ink);
+  --encre-2: var(--ink-2);
+  --gris: var(--ink-3);
+  --argile: var(--gold);
+  --argile-2: var(--gold-deep);
+  --terre: var(--gold);
+
+  /* One family, per the brief. */
+  --display: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --body: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+
+  /*
+    The brief specifies H1 273pt / H2 75pt — a 3.64:1 ratio. Those are print
+    sizes (273pt ≈ 364px, taller than a phone is wide), so the ratio is what
+    carries over, held at the top of the range and eased down for small screens.
+  */
+  --t-display: clamp(2.5rem, 1rem + 6.4vw, 7rem);
+  --t-h2: clamp(1.5rem, 1.05rem + 1.85vw, 2rem);
+  --t-h3: clamp(1.15rem, 1rem + 0.7vw, 1.45rem);
+  --t-body: clamp(1rem, 0.97rem + 0.16vw, 1.08rem);
+  --t-small: 0.9rem;
+  --t-label: 0.72rem;
+
+  --pad-x: clamp(1.25rem, 5vw, 5rem);
+  --pad-y: clamp(3.75rem, 8vw, 7.5rem);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-h: 4.25rem;
+  --round: 14px;
+
+  background: var(--os);
+  color: var(--encre);
+  font-family: var(--body);
+  font-size: var(--t-body);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 62rem) { .site { --nav-h: 4.75rem; } }
+
+.site ::selection { background: color-mix(in oklab, var(--terre) 32%, transparent); }
+
+.site :focus-visible { outline: 2px solid var(--argile); outline-offset: 3px; }
+
+/* ---------- primitives ---------- */
+
+.site .shell {
+  /* `width: 100%` matters: as a grid item .shell would otherwise size to its
+     content and the auto margins would have nothing to distribute, leaving the
+     hero text inset relative to the nav. */
+  width: 100%;
+  padding-inline: var(--pad-x);
+  max-width: 92rem;
+  margin-inline: auto;
+}
+
+.site .section { padding-block: var(--pad-y); }
+
+.site [id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
+
+.site .label {
+  font-size: var(--t-label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris);
+  font-weight: 600;
+}
+
+.site .disp {
+  font-family: var(--display);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.site .prose { max-width: 62ch; color: var(--encre-2); }
+
+.site .sec-head { display: grid; gap: 0.9rem; margin-bottom: clamp(2rem, 4.5vw, 3.5rem); }
+
+.site .sec-head h2 {
+  font-family: var(--display);
+  /* Light (300) per the brief. Light needs more leading and less tracking
+     than a mid weight, or it reads thin and loose at this size. */
+  font-weight: 300;
+  font-size: var(--t-h2);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+
+@media (min-width: 52rem) {
+  .site .sec-head { grid-template-columns: 1fr auto; align-items: end; }
+}
+
+.site [data-reveal] { opacity: 1; }
+
+.site.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+
+.site.reveal-ready [data-reveal][data-revealed] { opacity: 1; transform: none; }
+
+.site [data-delay="1"] { transition-delay: 0.08s; }
+.site [data-delay="2"] { transition-delay: 0.16s; }
+.site [data-delay="3"] { transition-delay: 0.24s; }
+
+/* ---------- buttons ---------- */
+
+/*
+  Obsidian on gold, not the reverse. Light text on Champagne Gold is 2.17:1;
+  flipping it gives 7.08:1 and reads as the brand's own gold-on-dark logic.
+*/
+.site .cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--gold);
+  color: var(--obsidian);
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.site .cta:hover {
+  background: color-mix(in oklab, var(--gold) 88%, var(--obsidian));
+  transform: translateY(-1px);
+}
+
+.site .ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: var(--t-small);
+  font-weight: 600;
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.site .ghost:hover { border-color: var(--argile); background: color-mix(in oklab, var(--argile) 7%, transparent); }
+
+.site .arrow { transition: transform 0.4s var(--ease); }
+.site .cta:hover .arrow, .site .ghost:hover .arrow { transform: translateX(3px); }
+
+/* ---------- nav ---------- */
+
+/*
+  Full-bleed bar for the background and blur, but its contents share `.shell`'s
+  max-width column so the nav lines up with the hero text instead of running to
+  the viewport edge on wide screens.
+*/
+.site .nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  color: var(--os);
+  transition: background 0.45s var(--ease), color 0.45s var(--ease), box-shadow 0.45s var(--ease);
+}
+
+.site .nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: var(--nav-h);
+  padding-inline: var(--pad-x);
+  max-width: 92rem;
+  margin-inline: auto;
+}
+
+.site .nav[data-solid="true"] {
+  background: color-mix(in oklab, var(--os) 92%, transparent);
+  backdrop-filter: blur(12px);
+  color: var(--encre);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.site .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+}
+
+/* Obsidian tile: the mark is gold-on-dark and cannot sit on greige directly. */
+.site .wordmark-tile {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 6px;
+  background: var(--obsidian);
+  overflow: hidden;
+}
+
+.site .wordmark-tile img {
+  width: 78%;
+  height: auto;
+}
+
+.site .wordmark-text {
+  display: none;
+  line-height: 1.1;
+}
+
+.site .wordmark-text em {
+  display: block;
+  font-style: normal;
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.66;
+  margin-top: 0.18rem;
+}
+
+@media (min-width: 30rem) {
+  .site .wordmark-text { display: block; }
+}
+
+.site .foot-logo {
+  width: clamp(10rem, 18vw, 13rem);
+  height: auto;
+  border-radius: 8px;
+}
+
+.site .nav-links { display: none; gap: clamp(1.25rem, 2.2vw, 2.25rem); font-size: var(--t-small); font-weight: 500; }
+
+.site .nav-links a { opacity: 0.85; transition: opacity 0.3s var(--ease); }
+.site .nav-links a:hover { opacity: 1; }
+
+.site .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+.site .nav-actions .cta { padding: 0.6rem 1.05rem; font-size: 0.82rem; }
+
+.site .icon-btn {
+  display: inline-grid;
+  place-items: center;
+  padding: 0.5rem;
+  border-radius: 999px;
+  color: inherit;
+}
+
+.site .nav-portal { display: none; }
+
+@media (min-width: 52rem) {
+  .site .nav-links { display: flex; }
+  .site .nav-actions .cta { padding: 0.75rem 1.35rem; font-size: var(--t-small); }
+  .site .nav-portal {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--t-small);
+    font-weight: 500;
+  }
+  .site .icon-only { display: none; }
+}
+
+/* The nav bar is a single line at every width. */
+.site .wordmark,
+.site .nav-links,
+.site .nav-portal,
+.site .nav-actions .cta { white-space: nowrap; }
+
+/* ---------- hero carousel ---------- */
+
+.site .hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+}
+
+.site .hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.3s var(--ease);
+  /* The drift animation scales past the frame — clip it here, not just on .hero. */
+  overflow: hidden;
+}
+
+.site .hero-slide[data-active="true"] { opacity: 1; }
+
+.site .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Slow drift keeps the still images feeling alive. */
+.site .hero-slide[data-active="true"] img {
+  animation: v1-drift 14s var(--ease) both;
+}
+
+@keyframes v1-drift {
+  from { transform: scale(1.05); }
+  to { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site .hero-slide[data-active="true"] img { animation: none; }
+}
+
+/*
+  Left-weighted wash plus a vertical gradient. These interiors are bright and
+  high-key, so the type needs a real ground to sit on, not a token tint.
+*/
+/*
+  Obsidian, and heavier than before. The headline is half Champagne Gold, a
+  mid-tone that needs a genuinely dark ground: over a bright window it was
+  washing out. The base tint keeps the whole frame consistent so gold stays
+  legible wherever the image happens to be light.
+*/
+.site .hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      oklch(18% 0 0 / 0.82) 0%,
+      oklch(18% 0 0 / 0.66) 42%,
+      oklch(18% 0 0 / 0.42) 74%,
+      oklch(18% 0 0 / 0.28) 100%
+    ),
+    linear-gradient(
+      to top,
+      oklch(18% 0 0 / 0.62) 0%,
+      oklch(18% 0 0 / 0.36) 40%,
+      oklch(18% 0 0 / 0.3) 72%,
+      oklch(18% 0 0 / 0.48) 100%
+    );
+}
+
+.site .hero-inner {
+  position: relative;
+  z-index: 1;
+  color: var(--os);
+  padding-block: clamp(6rem, 12vh, 9rem) clamp(2rem, 5vh, 3.5rem);
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* H1 at Regular (400) per the brief. Montserrat is wide and geometric, so it
+   needs negative tracking and tight leading at display size. */
+/*
+  Sized so the LONGEST rotating headline still fits on one line. The cap is
+  ~5.4vw rather than a fixed rem: at 7rem, "Nous donnons vie à vos projets."
+  measured 1432px inside a 1425px viewport and pushed past the edge.
+*/
+.site .hero h1 {
+  font-size: min(var(--t-display), 5.4vw + 0.5rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  max-width: 100%;
+}
+
+@media (max-width: 48rem) {
+  /* Small screens fall back to the fluid scale; the lines wrap rather than
+     shrink to an unreadable size. */
+  .site .hero h1 { font-size: var(--t-display); }
+}
+
+/*
+  Each sentence owns a line, so the headline is exactly two lines at every
+  width instead of reflowing to three. `balance` is off here — it would
+  re-wrap within a line and undo that.
+*/
+.site .hero-line {
+  display: block;
+  /* `pretty`, not `nowrap`: nowrap at a fixed size forced the longest
+     rotating headline past the viewport. See the h1 sizing note below. */
+  text-wrap: pretty;
+}
+
+/*
+  The headline rotates with the carousel. Reserving two lines keeps the lede
+  and CTAs still while it changes; without it the block would jump on every
+  swap. Fades in on remount (see the `key` on the h1).
+*/
+.site .hero-title {
+  min-height: calc(2 * 1.02em);
+  animation: hero-title-in 0.9s var(--ease) both;
+}
+
+@keyframes hero-title-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site .hero-title { animation: none; }
+}
+
+/*
+  The accent is colour, not italic: Montserrat italic is not part of this
+  identity. Gold on the hero's dark scrim, where it is legible.
+*/
+.site .hero h1 em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.site .hero-lede {
+  max-width: 40ch;
+  color: color-mix(in oklab, var(--os) 90%, transparent);
+  /* Light on dark needs extra leading. */
+  line-height: 1.75;
+}
+
+.site .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+
+.site .hero-actions .ghost { color: var(--os); border-color: color-mix(in oklab, var(--os) 40%, transparent); }
+.site .hero-actions .ghost:hover { border-color: var(--os); background: color-mix(in oklab, var(--os) 12%, transparent); }
+
+.site .hero-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Slide selectors: hairline rules, not dots. */
+.site .hero-nav { display: flex; gap: 0.5rem; align-items: center; }
+
+.site .hero-nav button {
+  width: 2.5rem;
+  height: 2px;
+  background: color-mix(in oklab, var(--os) 38%, transparent);
+  transition: background 0.4s var(--ease);
+  position: relative;
+}
+
+.site .hero-nav button::after {
+  content: "";
+  position: absolute;
+  inset: -0.6rem 0;
+}
+
+.site .hero-nav button[aria-current="true"] { background: var(--os); }
+
+/* ---------- intro ---------- */
+
+.site .intro-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
+
+/* 3:2 to match the source. A 5:6 portrait slot cropped the landscape
+   original to a sliver and magnified it, which read as pixelation. */
+.site .intro-media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--round);
+  overflow: hidden;
+}
+
+.site .intro-media img { width: 100%; height: 100%; object-fit: cover; }
+
+.site .intro-lede {
+  font-family: var(--display);
+  font-weight: 300;
+  font-size: clamp(1.3rem, 1.05rem + 1.3vw, 2.1rem);
+  line-height: 1.32;
+  max-width: 22ch;
+  letter-spacing: -0.02em;
+}
+
+.site .intro-cols { display: grid; gap: 1.5rem; margin-top: 1.75rem; }
+
+.site .intro-cols h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--t-h3);
+  margin-bottom: 0.35rem;
+}
+
+.site .intro-cols p { color: var(--gris); font-size: var(--t-small); line-height: 1.65; max-width: 38ch; }
+
+@media (min-width: 56rem) {
+  .site .intro-grid { grid-template-columns: 0.8fr 1.2fr; }
+  .site .intro-cols { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+}
+
+/* ---------- film-strip portfolio ---------- */
+
+.site .strip-wrap { position: relative; }
+
+/*
+  The strip runs edge to edge, but its first card must line up with the section
+  heading inside .shell — so the inline padding matches the shell's own gutter
+  (its centring margin plus --pad-x) rather than --pad-x alone.
+*/
+.site .strip {
+  --shell-gutter: max(
+    var(--pad-x),
+    calc((100vw - 92rem) / 2 + var(--pad-x))
+  );
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  overflow-x: auto;
+  /* `proximity`, not `mandatory`: mandatory pins scrollLeft to the first snap
+     point and makes the resting position unreachable. */
+  scroll-snap-type: x proximity;
+  scroll-padding-inline-start: var(--shell-gutter);
+  padding-inline: var(--shell-gutter);
+  padding-bottom: 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--sable-2) transparent;
+}
+
+.site .strip::-webkit-scrollbar { height: 6px; }
+.site .strip::-webkit-scrollbar-thumb { background: var(--sable-2); border-radius: 999px; }
+
+/* A button, so the card opens the lightbox and is keyboard reachable. */
+.site .card {
+  /* 82vw on a phone: one card reads as the subject with the next peeking in,
+     rather than 68vw which left an awkward sliver mid-title. */
+  flex: 0 0 clamp(16rem, 82vw, 24rem);
+  scroll-snap-align: start;
+  display: grid;
+  gap: 0.85rem;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+}
+
+.site .card-body {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.site .card-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--t-h3);
+  line-height: 1.15;
+  transition: color 0.3s var(--ease);
+}
+
+.site .card:hover .card-title {
+  color: var(--gold-deep);
+}
+
+/*
+  Landscape on phones. A 4:5 frame at 82vw is ~400px tall, which pushed the
+  title below the fold and made each card fill the screen on its own.
+*/
+.site .card-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--round);
+  overflow: hidden;
+  background: var(--sable);
+}
+
+@media (min-width: 48rem) {
+  .site .card-frame { aspect-ratio: 4 / 5; }
+}
+
+.site .card-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+
+.site .card:hover .card-frame img { transform: scale(1.04); }
+
+.site .card-plan {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  background: linear-gradient(160deg, var(--sable) 0%, var(--sable-2) 100%);
+  color: var(--gris);
+  transition: color 0.5s var(--ease);
+}
+
+.site .card:hover .card-plan { color: var(--gold-deep); }
+
+.site .card-plan svg { width: 100%; height: auto; }
+
+.site .card-sheets {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  font-size: var(--t-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* Sits on the darker end of the sand gradient — needs the ink tone for AA. */
+  color: var(--encre-2);
+  font-weight: 600;
+}
+
+.site .card h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--t-h3);
+  line-height: 1.15;
+  transition: color 0.3s var(--ease);
+}
+
+.site .card:hover h3 { color: var(--gold-deep); }
+
+.site .card-meta { display: block; font-size: var(--t-small); color: var(--gris); }
+
+/* ---------- gallery ---------- */
+
+/*
+  True masonry: columns fill top-to-bottom and each tile keeps its own aspect
+  ratio, so images run to their natural height instead of being cropped into a
+  uniform grid. `break-inside` stops a tile splitting across a column.
+*/
+.site .gal {
+  column-count: 1;
+  column-gap: clamp(0.75rem, 1.8vw, 1.35rem);
+}
+
+@media (min-width: 34rem) {
+  .site .gal { column-count: 2; }
+}
+
+@media (min-width: 62rem) {
+  .site .gal { column-count: 3; }
+}
+
+.site .gal-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-bottom: clamp(0.75rem, 1.8vw, 1.35rem);
+  break-inside: avoid;
+  border-radius: var(--round);
+  overflow: hidden;
+  background: var(--sable);
+  transition: transform 0.45s var(--ease);
+}
+
+/* Intrinsic height: the image sets the tile's shape, not a fixed ratio. */
+.site .gal-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.site .gal-item:hover {
+  transform: translateY(-3px);
+}
+
+.site .gal-item img {
+  transition: transform 0.7s var(--ease);
+}
+
+.site .gal-item:hover img {
+  transform: scale(1.05);
+}
+
+.site .gal-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2.75rem 1.1rem 1rem;
+  font-size: var(--t-small);
+  font-weight: 600;
+  color: var(--os);
+  background: linear-gradient(
+    to top,
+    oklch(20% 0.016 58 / 0.76),
+    oklch(20% 0.016 58 / 0)
+  );
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+
+.site .gal-item:hover .gal-cap,
+.site .gal-item:focus-visible .gal-cap {
+  opacity: 1;
+  transform: none;
+}
+
+.site .strip-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-inline: max(
+    var(--pad-x),
+    calc((100vw - 92rem) / 2 + var(--pad-x))
+  );
+  font-size: var(--t-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+/* ---------- services ---------- */
+
+.site .svc { display: grid; gap: clamp(1rem, 2vw, 1.5rem); }
+
+.site .svc article {
+  background: var(--sable);
+  border-radius: var(--round);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  display: grid;
+  gap: 0.55rem;
+  align-content: start;
+  transition: background 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.site .svc article:hover { background: var(--sable-2); transform: translateY(-2px); }
+
+.site .svc-i {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--t-small);
+  color: var(--gold-deep);
+}
+
+.site .svc h3 { font-family: var(--display); font-weight: 600; font-size: var(--t-h3); line-height: 1.15; }
+
+.site .svc p { color: var(--encre-2); font-size: var(--t-small); line-height: 1.6; }
+
+/*
+  One item per line. As an inline dot-separated run these wrapped mid-list and
+  left orphaned "·" opening a line, which read as a rendering fault.
+*/
+.site .svc ul {
+  display: grid;
+  gap: 0.35rem;
+  font-size: var(--t-small);
+  color: var(--gris);
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 44rem) { .site .svc { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 68rem) {
+  .site .svc { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- b2b ---------- */
+
+.site .b2b { background: var(--sable); }
+
+/* Ruled lines with a typographic check — deliberately not pills. */
+.site .b2b-reasons {
+  display: grid;
+  gap: 0;
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.site .b2b-reasons li {
+  display: grid;
+  grid-template-columns: 1.35rem 1fr;
+  gap: 0.5rem;
+  padding-block: 0.7rem;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--t-small);
+  color: var(--encre-2);
+  line-height: 1.5;
+}
+
+.site .b2b-reasons li::before {
+  content: "✓";
+  color: var(--gold-deep);
+  font-size: 0.85em;
+  line-height: 1.7;
+}
+
+.site .b2b-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
+
+.site .b2b-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--round);
+  overflow: hidden;
+}
+
+/*
+  The sources are landscape (~1440x1080). Stretching this slot to match the
+  taller text column cropped them into a portrait sliver and magnified the
+  remainder, which read as pixelation. Keep the native ratio and pin the image
+  to the top of its column instead.
+*/
+@media (min-width: 58rem) {
+  .site .b2b-grid { align-items: start; }
+  .site .b2b-media { position: sticky; top: calc(var(--nav-h) + 2rem); }
+}
+
+.site .b2b-media img { width: 100%; height: 100%; object-fit: cover; }
+
+.site .b2b-list { display: grid; gap: 1.25rem; margin-top: 1.75rem; }
+
+.site .b2b-list > div { display: grid; gap: 0.3rem; }
+
+.site .b2b-list h3 { font-family: var(--display); font-weight: 600; font-size: 1.05rem; }
+.site .b2b-list p { color: var(--gris); font-size: var(--t-small); line-height: 1.6; max-width: 42ch; }
+
+@media (min-width: 58rem) { .site .b2b-grid { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- software ---------- */
+
+.site .soft { display: grid; gap: 0; }
+
+.site .soft > div {
+  display: grid;
+  gap: 0.3rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.site .soft > div:first-child { border-top: 1px solid var(--line); }
+
+.site .soft-n { font-family: var(--display); font-weight: 600; font-size: clamp(1.3rem, 1.05rem + 1.1vw, 2rem); line-height: 1.1; }
+.site .soft-u { color: var(--gris); font-size: var(--t-small); }
+
+@media (min-width: 48rem) {
+  .site .soft > div { grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: baseline; }
+}
+
+/* ---------- contact ---------- */
+
+.site .contact { position: relative; overflow: hidden; }
+
+.site .contact-card {
+  position: relative;
+  border-radius: clamp(16px, 3vw, 28px);
+  overflow: hidden;
+  color: var(--os);
+  padding: clamp(2.25rem, 6vw, 5rem);
+  display: grid;
+  gap: 1.35rem;
+  justify-items: start;
+}
+
+.site .contact-card > img,
+.site .contact-card .contact-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.site .contact-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    oklch(24% 0.016 58 / 0.88) 0%,
+    oklch(24% 0.016 58 / 0.62) 62%,
+    oklch(24% 0.016 58 / 0.42) 100%
+  );
+  z-index: -1;
+}
+
+.site .contact-card h2 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: var(--t-h2);
+  line-height: 1.08;
+  max-width: 15ch;
+}
+
+.site .contact-card p { max-width: 44ch; color: color-mix(in oklab, var(--os) 86%, transparent); line-height: 1.75; }
+
+/* ---------- footer ---------- */
+
+.site .foot {
+  background: var(--sable);
+  padding-block: clamp(2.25rem, 5vw, 4rem);
+  font-size: var(--t-small);
+  color: var(--encre-2);
+}
+
+.site .foot-grid { display: grid; gap: 2rem; }
+
+.site .foot h3 {
+  font-size: var(--t-label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gris);
+  margin-bottom: 0.65rem;
+  font-weight: 600;
+}
+
+.site .foot a:hover { color: var(--gold-deep); }
+
+.site .foot-base {
+  margin-top: clamp(1.75rem, 4vw, 3rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 0.6rem;
+  color: var(--gris);
+  font-size: 0.8rem;
+}
+
+@media (min-width: 48rem) {
+  .site .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; }
+  .site .foot-base { grid-template-columns: 1fr auto; align-items: center; }
+}

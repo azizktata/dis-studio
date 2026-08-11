@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Assistant from "../../_components/Assistant";
-import { ArrowRight, Portal } from "../../_components/Icons";
-import IntakeWizard from "../../_components/IntakeWizard";
-import Lightbox from "../../_components/Lightbox";
-import PlanFigure from "../../_components/PlanFigure";
-import PortalDrawer from "../../_components/PortalDrawer";
-import VersionSwitch from "../../_components/VersionSwitch";
+import Assistant from "../_components/Assistant";
+import { ArrowRight, Portal } from "../_components/Icons";
+import IntakeWizard from "../_components/IntakeWizard";
+import Lightbox from "../_components/Lightbox";
+import PlanFigure from "../_components/PlanFigure";
+import PortalDrawer from "../_components/PortalDrawer";
 import {
   ambience,
   b2b,
@@ -16,9 +15,9 @@ import {
   services,
   software,
   studio,
-} from "../../_lib/content";
-import { sizeOf } from "../../_lib/imageSizes";
-import { useReveal } from "../../_lib/useReveal";
+} from "../_lib/content";
+import { sizeOf } from "../_lib/imageSizes";
+import { useReveal } from "../_lib/useReveal";
 
 const slides = [
   ambience.heroSalon,
@@ -64,8 +63,25 @@ export default function Landing() {
       <header className="nav" data-solid={solid}>
         {/* Inner column matches .shell so the bar aligns with the hero text. */}
         <div className="nav-inner">
-        <a href="#top" className="wordmark">
-          DIS Studio
+        {/*
+          The mark keeps its obsidian ground — it is gold and off-white, so it
+          only reads against dark. The tile is the honest treatment for raster
+          artwork and echoes the logo's own construction.
+        */}
+        <a href="#top" className="wordmark" aria-label="DIS Studio, accueil">
+          <span className="wordmark-tile">
+            <Image
+              src="/brand/logo-mark.jpg"
+              alt=""
+              width={480}
+              height={314}
+              priority
+            />
+          </span>
+          <span className="wordmark-text">
+            DIS Studio
+            <em>Design Innovation Solutions</em>
+          </span>
         </a>
         <nav className="nav-links" aria-label="Principale">
           <a href="#projets">Projets</a>
@@ -114,8 +130,15 @@ export default function Landing() {
             {/* <p className="label" style={{ color: "inherit", opacity: 0.8 }}>
               {studio.location} · Depuis {studio.since}
             </p> */}
-            <h1 className="disp">
-              {studio.heroTitle} <em>{studio.heroTitleAccent}</em>
+            {/*
+              The headline changes with the slide. `key` forces a remount so
+              each one fades in rather than swapping mid-word. aria-live is
+              deliberately off: this rotates on a timer, and announcing every
+              change would talk over a screen-reader user.
+            */}
+            <h1 className="disp hero-title" key={slide}>
+              <span className="hero-line">{studio.heroTitles[slide].lead}</span>
+              <em className="hero-line">{studio.heroTitles[slide].accent}</em>
             </h1>
             <p className="hero-lede">{studio.heroLede}</p>
             <div className="hero-actions">
@@ -374,7 +397,7 @@ export default function Landing() {
         <section className="section shell contact" id="contact">
           <div className="contact-card" data-reveal>
             <Image
-              src={ambience.chambreChaude.src}
+              src={ambience.salonBois.src}
               alt=""
               fill
               sizes="100vw"
@@ -401,10 +424,17 @@ export default function Landing() {
         <div className="shell">
           <div className="foot-grid">
             <div>
-              <p className="wordmark">DIS Studio</p>
-              <p style={{ marginTop: "0.7rem", maxWidth: "34ch", lineHeight: 1.7 }}>
+              {/* The footer is already dark, so the full lockup sits on its
+                  native ground with no tile needed. */}
+              <Image
+                className="foot-logo"
+                src="/brand/logo-full.jpg"
+                alt="DIS Studio — Design Innovation Solutions"
+                width={720}
+                height={669}
+              />
+              <p style={{ marginTop: "1rem", maxWidth: "34ch", lineHeight: 1.7 }}>
                 {studio.tagline}. Conception et production à Tunis.
-                    {/* <p>© {studio.since} DIS Studio</p> */}
               </p>
             </div>
             
@@ -442,7 +472,6 @@ export default function Landing() {
         </div>
       </footer>
 
-      <VersionSwitch />
       <Assistant />
       <IntakeWizard open={wizard} onClose={() => setWizard(false)} />
       <PortalDrawer open={portal} onClose={() => setPortal(false)} />

@@ -393,8 +393,16 @@ export const studio = {
   positioning:
     "DIS Studio prend en charge la conception, le dessin technique et la modélisation 3D des firmes de design, cabinets d'architecture et fabricants de mobilier, comme une extension de leur équipe.",
   /* Hero copy lives here: the client has revised it twice, so one source. */
-  heroTitle: "Vous concevez.",
-  heroTitleAccent: "Nous donnons vie à vos projets.",
+  /*
+   * One headline per hero slide, changing with the image. Each is two lines —
+   * a plain first line and a gold second — so the block never reflows to three.
+   * Order runs from what DIS Studio *is*, to what it *does*, to the scope.
+   */
+  heroTitles: [
+    { lead: "Le partenaire technique", accent: "des firmes de design." },
+    { lead: "Vous concevez.", accent: "Nous donnons vie à vos projets." },
+    { lead: "De la première esquisse", accent: "aux plans d'exécution." },
+  ],
   heroLede:
     "Conception, dessin technique et modélisation 3D pour les firmes de design, cabinets d'architecture et fabricants de mobilier.",
   location: "Tunis, Tunisie",
