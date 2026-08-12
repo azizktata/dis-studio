@@ -405,7 +405,7 @@ export const studio = {
   ],
   heroLede:
     "Conception, dessin technique et modélisation 3D pour les firmes de design, cabinets d'architecture et fabricants de mobilier.",
-  location: "Tunis, Tunisie",
+  location: "UPTON,QUÉBEC J0H2E0 CANADA",
   email: "contact@disstudio.tn",
   /* Earliest delivered project. Must never post-date the portfolio. */
   since: "2022",
