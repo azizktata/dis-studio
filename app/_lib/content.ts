@@ -126,6 +126,24 @@ export type Project = {
 const shot = (slug: string, n: number) =>
   `/projets/${slug}/${String(n).padStart(2, "0")}.jpg`;
 
+/**
+ * Every page of a rendered dossier, in order.
+ *
+ * Written by `scripts/render-dossiers.mjs` as `p01.jpg …`. Kept separate from
+ * `shot()` because these are complete documents the visitor pages through,
+ * not a curated selection.
+ *
+ * Both wrappers are dropped. Page 1 is a near-blank cover carrying only the
+ * document title, and the last page is a « MERCI POUR VOTRE ATTENTION » slide
+ * — neither is a drawing, and the cover made a poor card thumbnail. `pages` is
+ * the PDF's own page count, so the drawing sheets are pages 2 … n-1.
+ */
+const dossier = (slug: string, pages: number) =>
+  Array.from(
+    { length: pages - 2 },
+    (_, i) => `/projets/${slug}/p${String(i + 2).padStart(2, "0")}.jpg`,
+  );
+
 /*
  * Order is deliberate: the interior work leads, because that is what the studio
  * sells. The 3D product study (yacht + van, one merged entry) closes the list
@@ -201,21 +219,17 @@ export const projects: Project[] = [
   },
   {
     slug: "showroom-jeremy",
-    title: "Showroom, agencement",
+    title: "Matériauthèque & showroom",
     category: "Tertiaire / Bureaux",
     software: "SketchUp",
     year: "2022",
     location: "France",
     summary:
       "Mobilier sur mesure coté au millimètre : comptoir, claustra, banque d'accueil et rangements d'atelier.",
-    images: [
-      shot("showroom-jeremy", 1),
-      shot("showroom-jeremy", 2),
-      shot("showroom-jeremy", 3),
-      shot("showroom-jeremy", 4),
-    ],
+    /* The complete dossier, browsable page by page. */
+    images: dossier("showroom-jeremy", 30),
     drawingsOnly: true,
-    deliverable: "Dossier d'exécution · 20 planches",
+    deliverable: "Dossier d'exécution · 28 planches",
   },
   {
     slug: "showroom-siceram",
@@ -231,16 +245,16 @@ export const projects: Project[] = [
   },
   {
     slug: "mareli",
-    title: "Rangements sur mesure",
-    category: "Tertiaire / Bureaux",
+    title: "Buanderie & rangements",
+    category: "Résidentiel",
     software: "SketchUp",
     year: "2022",
     location: "France",
     summary:
-      "Étude de rangements et de linéaires : nomenclature, cotes et implantation prêtes pour l'atelier.",
-    images: [shot("mareli", 1), shot("mareli", 2)],
+      "Buanderie et rangements en stratifié : caissons, étagères et façades push-to-open, cotés pour l'atelier.",
+    images: dossier("mareli", 22),
     drawingsOnly: true,
-    deliverable: "Dossier de consultation · 22 planches",
+    deliverable: "Dossier de consultation · 20 planches",
   },
   {
     /* Vector AutoCAD sheets, rasterised by scripts/render-pdf-pages.mjs. */
@@ -276,6 +290,76 @@ export const projects: Project[] = [
     ],
     drawingsOnly: true,
     deliverable: "Dossier technique · 13 planches",
+  },
+  /*
+   * The remaining execution dossiers, rendered page by page by
+   * scripts/render-dossiers.mjs. All `drawingsOnly` — 165 technical sheets
+   * would bury the rendered interiors in the gallery.
+   */
+  {
+    slug: "maurice-bares",
+    title: "Résidence, aménagement complet",
+    category: "Résidentiel",
+    software: "SketchUp",
+    year: "2023",
+    location: "France",
+    summary:
+      "Cuisine, dégagements et rangements sur mesure : le dossier le plus complet, pièce par pièce.",
+    images: dossier("maurice-bares", 70),
+    drawingsOnly: true,
+    deliverable: "Dossier d'exécution · 68 planches",
+  },
+  {
+    slug: "joana",
+    title: "Chambres & dressings",
+    category: "Résidentiel",
+    software: "SketchUp",
+    year: "2023",
+    location: "France",
+    summary:
+      "Bureau de chambre, penderies et niches en MDF plaqué chêne : élévations et perspectives cotées.",
+    images: dossier("joana", 24),
+    drawingsOnly: true,
+    deliverable: "Dossier d'exécution · 22 planches",
+  },
+  {
+    slug: "joanna-dayan",
+    title: "Meuble encastré & cheminée",
+    category: "Résidentiel",
+    software: "SketchUp",
+    year: "2022",
+    location: "France",
+    summary:
+      "Bibliothèque encastrée avec panneaux coulissants : perspective, coupes et détails de fixation invisible.",
+    images: dossier("joanna-dayan", 8),
+    drawingsOnly: true,
+    deliverable: "Dossier de consultation · 6 planches",
+  },
+  {
+    slug: "pharmacie-juan",
+    title: "Pharmacie, mobilier commercial",
+    category: "Tertiaire / Bureaux",
+    software: "SketchUp",
+    year: "2023",
+    location: "France",
+    summary:
+      "Linéaires sur rails aluminium, étagères verre et stratifié noir mat : agencement complet d'officine.",
+    images: dossier("pharmacie-juan", 7),
+    drawingsOnly: true,
+    deliverable: "Dossier d'exécution · 5 planches",
+  },
+  {
+    slug: "eleonore",
+    title: "Bibliothèque sur mesure",
+    category: "Résidentiel",
+    software: "SketchUp",
+    year: "2022",
+    location: "France",
+    summary:
+      "Étagères et socle en chêne naturel : plan, face, perspective et détails de fixation, cotés au millimètre.",
+    images: dossier("eleonore", 4),
+    drawingsOnly: true,
+    deliverable: "Dossier d'exécution · 2 planches",
   },
   {
     /* Yacht and van merged: same discipline, same story. A 3ds Max render is
@@ -432,12 +516,54 @@ export const b2b = {
   ],
   /* Typeset as a ruled list, never as pills. ✓ is a text marker, not an emoji. */
   reasonsTitle: "Pourquoi choisir DIS Studio",
+  /*
+   * Capacity and deadlines moved up to `whyDis`, which now answers those two
+   * points before the visitor reaches this section. Repeating them here would
+   * make the page say the same thing twice.
+   */
   reasons: [
-    "Augmentez votre capacité de production sans recruter.",
-    "Respectez vos échéanciers, même en période de pointe.",
     "Confiez vos projets à une équipe spécialisée en design et en documentation technique.",
     "Recevez des livrables professionnels, conformes à vos exigences.",
     "Travaillez avec un partenaire qui s'intègre à votre façon de travailler.",
+  ],
+};
+
+/*
+ * The three benefits a prospect weighs before asking for a quote. Sits
+ * directly under the intro so it answers "pourquoi DIS ?" while the visitor is
+ * still learning who they are — the hero CTA points straight at it.
+ */
+export const whyDis = {
+  label: "Pourquoi DIS",
+  title: "Ce que vous gagnez à travailler avec nous.",
+  /*
+   * A delivered commercial interior, not an ambience photo. The section claims
+   * production capability, and a showroom of this scale is better evidence of
+   * it than a domestic room. Its dark ceiling also gives the gold watermark
+   * something to sit against. Sheet 02 of this project is deliberately not
+   * used: it carries the end client's own signage, which would compete with
+   * the DIS mark laid over it. Landscape source — never crop it portrait.
+   */
+  image: {
+    src: shot("showroom-siceram", 1),
+    alt: "Showroom de revêtements : présentoirs de dalles, éclairage sur rail et parcours d'exposition",
+  },
+  benefits: [
+    {
+      index: "01",
+      title: "Plus de capacité",
+      body: "Augmentez votre capacité de production sans recruter de nouvelles ressources.",
+    },
+    {
+      index: "02",
+      title: "Plus de rapidité",
+      body: "Respectez vos échéanciers, même lors des périodes de forte charge de travail.",
+    },
+    {
+      index: "03",
+      title: "Plus de rentabilité",
+      body: "Réduisez vos coûts fixes et bénéficiez d'une équipe technique flexible selon vos besoins.",
+    },
   ],
 };
 

@@ -822,6 +822,164 @@
 
 .site .b2b-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
 
+/* ---------- pourquoi DIS ---------- */
+
+/*
+  The intro and this section are one movement, not two blocks: the intro drops
+  its bottom padding and this drops its top, so they read as connected. A
+  hairline does the separating instead of a full --pad-y gap.
+*/
+.site .section-joined { padding-bottom: 0; }
+
+.site .section-follows {
+  padding-top: clamp(1.75rem, 3vw, 2.75rem);
+}
+
+/*
+  Mirrors .intro-grid — same gap and ratio, image and text swapped. Keeping the
+  0.8fr on the media in both means the narrow column is always the picture, so
+  the two joined sections share a spine instead of just being reversed.
+*/
+.site .why-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
+
+.site .why-media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--round);
+  overflow: hidden;
+  /* Source order is text-then-image so the heading leads on a phone; on wide
+     screens it moves to column 2. */
+  order: -1;
+}
+
+.site .why-media > img { width: 100%; height: 100%; object-fit: cover; }
+
+/*
+  Brand signature over the work. A gradient scrim darkens the lower-left corner
+  just enough for the gold to hold, so the mark needs no plate behind it — a
+  framed logo box would read as a sticker and the art direction rules out
+  framed cards. `mix-blend-mode: screen` lets the artwork pick up the photo
+  underneath instead of sitting flatly on top.
+*/
+.site .why-watermark {
+  position: absolute;
+  left: clamp(1rem, 3%, 1.75rem);
+  bottom: clamp(1rem, 3%, 1.75rem);
+  width: clamp(5.5rem, 26%, 9rem);
+  z-index: 1;
+  pointer-events: none;
+  /*
+    `screen` alone bleached the mark against the dark rug. Normal blend at a
+    lower opacity keeps the gold reading as gold, and a soft drop shadow —
+    the one place the no-shadow rule bends, because it separates artwork from
+    photograph rather than framing a card — holds it over the lighter areas.
+  */
+  opacity: 0.72;
+  filter: drop-shadow(0 1px 6px color-mix(in oklab, var(--obsidian) 55%, transparent));
+}
+
+.site .why-watermark img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Sits under the mark, above the photo: a soft corner wash, not a panel. */
+.site .why-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top right,
+    color-mix(in oklab, var(--obsidian) 78%, transparent) 0%,
+    color-mix(in oklab, var(--obsidian) 46%, transparent) 20%,
+    color-mix(in oklab, var(--obsidian) 12%, transparent) 38%,
+    transparent 56%
+  );
+}
+
+.site .why-head {
+  display: grid;
+  gap: 0.75rem;
+  padding-top: clamp(1.75rem, 3vw, 2.75rem);
+  border-top: 1px solid var(--line);
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.site .why-title {
+  font-size: var(--t-h2);
+  max-width: 20ch;
+  text-wrap: balance;
+}
+
+/* Ruled rows with gold numerals — the same language as .b2b-reasons. */
+.site .why-list {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.site .why-list li {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding-block: clamp(1rem, 2vw, 1.4rem);
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.site .why-index {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--t-small);
+  color: var(--gold-deep);
+  letter-spacing: 0.06em;
+}
+
+.site .why-body {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.site .why-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: var(--t-h3);
+  line-height: 1.2;
+}
+
+.site .why-text {
+  color: var(--encre-2);
+  font-size: var(--t-small);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+@media (min-width: 52rem) and (max-width: 55.999rem) {
+  /* Between the stack and the two-column grid the list has the full shell to
+     itself, so name and description sit side by side and the three benefits
+     scan as a table. Above 56rem the text shares the row with the image and
+     there is no longer room, so this reverts to the stacked form. */
+  .site .why-list li { grid-template-columns: 2.75rem 16rem 1fr; }
+  .site .why-body { display: contents; }
+}
+
+@media (min-width: 56rem) {
+  /* Inverted against .intro-grid: text first, media second. */
+  .site .why-grid { grid-template-columns: 1.2fr 0.8fr; align-items: stretch; }
+  .site .why-media {
+    order: 0;
+    /* The three ruled rows make the text column taller than a 3:2 slot, which
+       left a void beside them. Letting the media take the full row height and
+       capping it keeps the pair balanced without cropping a landscape source
+       into a portrait sliver. */
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: clamp(20rem, 34vw, 30rem);
+  }
+}
+
 .site .b2b-media {
   position: relative;
   aspect-ratio: 4 / 3;

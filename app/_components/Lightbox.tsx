@@ -93,7 +93,8 @@ export default function Lightbox({ project, onClose }: Props) {
             fill
             sizes="(min-width: 60rem) 76vw, 96vw"
             style={{ objectFit: "contain" }}
-            priority
+            /* No `priority`: the lightbox opens on demand, and a 70-page
+               dossier should never preload. */
           />
         </div>
 
