@@ -22,7 +22,7 @@ export default function Gallery() {
       <div className="sec-head">
         <h2 data-reveal>Galerie</h2>
         <p className="label" data-reveal>
-          {galleryShots.length} vues · cliquez pour agrandir
+         cliquez pour agrandir
         </p>
       </div>
       <div className="gal">

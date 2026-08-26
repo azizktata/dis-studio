@@ -15,7 +15,7 @@ export default function Projects() {
         <div className="sec-head">
           <h2 data-reveal>Projets récents</h2>
           <p className="label" data-reveal>
-            {projects.length} réalisations
+              cliquez pour agrandir
           </p>
         </div>
       </div>

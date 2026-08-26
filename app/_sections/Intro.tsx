@@ -30,22 +30,24 @@ export default function Intro() {
           </h2>
           <p className="prose" data-reveal style={{ marginTop: "1.25rem" }}>
             {studio.positioning}
+            <br />
+            <br />
+            Notre équipe s’adapte à vos méthodes, vos logiciels, vos standards
+            et vos échéanciers. Confiez-nous une partie ou la totalité de vos
+            besoins en conception, dessin technique et modélisation 3D.
           </p>
           <div className="intro-cols">
-            <div data-reveal data-delay="1">
-              <h3>Pour les firmes &amp; cabinets</h3>
-              <p>
-                Plans techniques, modélisation et documentation produits à vos
-                gabarits et livrés sous votre nom.
-              </p>
-            </div>
-            <div data-reveal data-delay="2">
+            {/* <div data-reveal data-delay="1">
+              <h3>Une capacité de production adaptée à vos besoins</h3>
+              <p></p>
+            </div> */}
+            {/* <div data-reveal data-delay="2">
               <h3>Pour les projets directs</h3>
               <p>
                 Résidences, commerces et bureaux, du concept jusqu’au chantier,
                 avec un interlocuteur unique.
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

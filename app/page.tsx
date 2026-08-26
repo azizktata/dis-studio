@@ -22,10 +22,10 @@ export default function Home() {
         <Intro />
         <WhyDis />
         <Projects />
-        <Gallery />
         <Process />
         <B2B />
         <Software />
+        <Gallery />
         <Contact />
       </main>
       <Footer />

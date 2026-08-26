@@ -22,10 +22,9 @@ export default function Contact() {
         <p className="label" style={{ color: "inherit", opacity: 0.8 }}>
           Démarrer
         </p>
-        <h2>Racontez-nous votre lieu</h2>
+        <h2>Besoin de capacité supplémentaire ?</h2>
         <p>
-          Quelques questions adaptées à votre projet, et nous revenons vers vous
-          rapidement avec une première lecture, sans engagement.
+          Confiez-nous une partie ou la totalité de votre production technique. Nous nous adaptons à vos logiciels, vos standards, votre charge de travail et vos échéanciers.
         </p>
         {/* End of page: the visitor has seen the work and the offer. */}
         <button className="cta" onClick={openWizard}>

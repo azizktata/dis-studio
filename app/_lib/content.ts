@@ -412,7 +412,7 @@ export const services: Service[] = [
     index: "01",
     title: "Analyse & prise de brief",
     summary:
-      "Nous recueillons les besoins, les objectifs et les contraintes afin de bien comprendre le projet.",
+      "Nous recevons le mandat, les besoins, les standards, les fichiers existants et les contraintes du client professionnel.",
     detail: [
       "Rencontre découverte",
       "Analyse des besoins",
@@ -424,7 +424,7 @@ export const services: Service[] = [
     index: "02",
     title: "Conception & production",
     summary:
-      "Le projet est confié au designer le plus qualifié de l'équipe, qui transforme les idées en solutions techniques et créatives.",
+      " Le projet est confié au designer de notre équipe dont les compétences correspondent le mieux au mandat. La production est réalisée selon les logiciels, standards et exigences convenus avec le client.",
     detail: [
       "Conception sur mesure",
       "Plans techniques 2D",
@@ -436,7 +436,7 @@ export const services: Service[] = [
     index: "03",
     title: "Révision & validation",
     summary:
-      "Chaque proposition est vérifiée par DIS Studio, puis présentée. Les ajustements se poursuivent jusqu'à une solution conforme aux attentes.",
+      "DIS Studio vérifie les livrables avant leur transmission. Les ajustements nécessaires sont effectués jusqu’à validation.",
     detail: [
       "Contrôle qualité",
       "Présentation au client",
@@ -448,7 +448,7 @@ export const services: Service[] = [
     index: "04",
     title: "Livraison & accompagnement",
     summary:
-      "Nous livrons un dossier complet, prêt pour l'entreprise, l'atelier ou le chantier, et restons disponibles pour le suivi.",
+      "Les fichiers finaux et fichiers sources sont remis au client professionnel dans les formats convenus, prêts à être intégrés à son projet, transmis à son équipe, à l’atelier ou au chantier.",
     detail: [
       "Plans d'exécution",
       "Dossier technique complet",
@@ -484,11 +484,12 @@ export const studio = {
    */
   heroTitles: [
     { lead: "Le partenaire technique", accent: "des firmes de design." },
-    { lead: "Vous concevez.", accent: "Nous donnons vie à vos projets." },
+    { lead: "Une équipe de conception", accent: "qui renforce la vôtre." },
+    // { lead: "Vous concevez.", accent: "Nous donnons vie à vos projets." },
     { lead: "De la première esquisse", accent: "aux plans d'exécution." },
   ],
   heroLede:
-    "Conception, dessin technique et modélisation 3D pour les firmes de design, cabinets d'architecture et fabricants de mobilier.",
+    "Augmentez votre capacité de production grâce à une équipe technique qui s’intègre à la vôtre: Conception, dessin technique et modélisation 3D pour les firmes de design, cabinets d’architecture, fabricants de mobilier et entreprises d’aménagement.",
   location: "UPTON,QUÉBEC J0H2E0 CANADA",
   email: "contact@disstudio.tn",
   /* Earliest delivered project. Must never post-date the portfolio. */

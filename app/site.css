@@ -450,7 +450,7 @@
 }
 
 .site .hero-lede {
-  max-width: 40ch;
+  max-width: 42ch;
   color: color-mix(in oklab, var(--os) 90%, transparent);
   /* Light on dark needs extra leading. */
   line-height: 1.75;
@@ -490,7 +490,7 @@
 
 /* ---------- intro ---------- */
 
-.site .intro-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: center; }
+.site .intro-grid { display: grid; gap: clamp(1.75rem, 4vw, 3.5rem); align-items: start; }
 
 /* 3:2 to match the source. A 5:6 portrait slot cropped the landscape
    original to a sliver and magnified it, which read as pixelation. */
@@ -508,7 +508,7 @@
   font-weight: 300;
   font-size: clamp(1.3rem, 1.05rem + 1.3vw, 2.1rem);
   line-height: 1.32;
-  max-width: 22ch;
+  max-width: 25ch;
   letter-spacing: -0.02em;
 }
 
