@@ -483,8 +483,8 @@ export const studio = {
    * Order runs from what DIS Studio *is*, to what it *does*, to the scope.
    */
   heroTitles: [
-    { lead: "Le partenaire technique", accent: "des firmes de design." },
     { lead: "Une équipe de conception", accent: "qui renforce la vôtre." },
+    { lead: "Le partenaire technique", accent: "des firmes de design." },
     // { lead: "Vous concevez.", accent: "Nous donnons vie à vos projets." },
     { lead: "De la première esquisse", accent: "aux plans d'exécution." },
   ],

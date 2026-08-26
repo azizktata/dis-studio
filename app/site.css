@@ -450,7 +450,7 @@
 }
 
 .site .hero-lede {
-  max-width: 42ch;
+  max-width: 52ch;
   color: color-mix(in oklab, var(--os) 90%, transparent);
   /* Light on dark needs extra leading. */
   line-height: 1.75;
