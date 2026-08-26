@@ -523,6 +523,7 @@ export const b2b = {
    * make the page say the same thing twice.
    */
   reasons: [
+    "une capacité de conception externalisée et flexible qui vient renforcer les équipes des entreprises clientes.",
     "Confiez vos projets à une équipe spécialisée en design et en documentation technique.",
     "Recevez des livrables professionnels, conformes à vos exigences.",
     "Travaillez avec un partenaire qui s'intègre à votre façon de travailler.",
