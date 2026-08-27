@@ -85,7 +85,7 @@ export default function Assistant() {
                 <h2 id={titleId} className="assist-title">
                   Assistant DIS
                 </h2>
-                <p className="assist-sub">Réponses courantes · lun–ven</p>
+                <p className="assist-sub">Réponses courantes</p>
               </div>
               <button
                 className="ov-close"
@@ -115,7 +115,7 @@ export default function Assistant() {
 
             {unasked.length > 0 && (
               <div className="assist-suggest">
-                {unasked.slice(0, 2).map((s) => (
+                {unasked.slice(0, 3).map((s) => (
                   <button key={s.q} onClick={() => ask(s.q)}>
                     {s.q}
                   </button>
@@ -123,7 +123,7 @@ export default function Assistant() {
               </div>
             )}
 
-            <form
+            {/* <form
               className="assist-form"
               onSubmit={(e) => {
                 e.preventDefault();
@@ -143,7 +143,7 @@ export default function Assistant() {
               <button type="submit" aria-label="Envoyer" disabled={!draft.trim()}>
                 <Send />
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       )}

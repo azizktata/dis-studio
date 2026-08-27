@@ -518,11 +518,7 @@ export const b2b = {
   ],
   /* Typeset as a ruled list, never as pills. ✓ is a text marker, not an emoji. */
   reasonsTitle: "Pourquoi choisir DIS Studio",
-  /*
-   * Capacity and deadlines moved up to `whyDis`, which now answers those two
-   * points before the visitor reaches this section. Repeating them here would
-   * make the page say the same thing twice.
-   */
+
   reasons: [
     "une capacité de conception externalisée et flexible qui vient renforcer les équipes des entreprises clientes.",
     "Confiez vos projets à une équipe spécialisée en design et en documentation technique.",
@@ -531,22 +527,9 @@ export const b2b = {
   ],
 };
 
-/*
- * The three benefits a prospect weighs before asking for a quote. Sits
- * directly under the intro so it answers "pourquoi DIS ?" while the visitor is
- * still learning who they are — the hero CTA points straight at it.
- */
 export const whyDis = {
   label: "Pourquoi DIS",
   title: "Ce que vous gagnez à travailler avec nous.",
-  /*
-   * A delivered commercial interior, not an ambience photo. The section claims
-   * production capability, and a showroom of this scale is better evidence of
-   * it than a domestic room. Its dark ceiling also gives the gold watermark
-   * something to sit against. Sheet 02 of this project is deliberately not
-   * used: it carries the end client's own signage, which would compete with
-   * the DIS mark laid over it. Landscape source — never crop it portrait.
-   */
   image: {
     src: shot("showroom-siceram", 1),
     alt: "Showroom de revêtements : présentoirs de dalles, éclairage sur rail et parcours d'exposition",
@@ -700,20 +683,204 @@ export const chatIntro =
 
 export const chatScript: { q: string; a: string }[] = [
   {
-    /*
-     * No fixed turnaround here on purpose: DIS Studio has not committed to an
-     * SLA, and a promise the team can miss costs more than a careful answer.
-     */
-    q: "Quels sont vos délais pour des rendus 3D ?",
-    a: "Le délai dépend du nombre de vues, de la complexité du modèle et de l'état des fichiers de départ. Nous confirmons un échéancier précis à la réception de votre demande, et nous replanifions volontiers les projets urgents.",
+    q: "Quels services proposez-vous ?",
+    a: "DIS Studio accompagne les professionnels de l'aménagement en conception, dessin technique 2D, modélisation 3D, rendus, plans de fabrication et documentation technique.",
   },
   {
-    q: "Comment fonctionne la collaboration avec les firmes de design ?",
-    a: "Vous nous transmettez vos gabarits et vos références ; nous produisons à votre charte et vous livrons des fichiers sources exploitables. Les livrables partent sous votre nom, et vous demeurez le seul point de contact avec votre client. Nous prenons aussi bien une planche isolée qu'un dossier d'exécution complet.",
+    q: "Quels types de clients accompagnez-vous ?",
+    a: "Nous travaillons principalement avec les firmes de design, cabinets d'architecture, fabricants de mobilier et entreprises d'aménagement.",
+  },
+  // {
+  //   q: "Travaillez-vous avec des firmes de design ?",
+  //   a: "Oui. DIS Studio agit comme une extension de votre équipe afin d'augmenter votre capacité de production, sans avoir à recruter de nouvelles ressources.",
+  // },
+  // {
+  //   q: "Travaillez-vous avec des architectes ?",
+  //   a: "Oui. Nous accompagnons les cabinets d'architecture dans leurs besoins de conception, dessin technique, modélisation 3D et documentation.",
+  // },
+  // {
+  //   q: "Faites-vous des plans 2D ?",
+  //   a: "Oui. Nous réalisons des plans techniques 2D et de la documentation selon les standards et exigences convenus avec votre équipe.",
+  // },
+  // {
+  //   q: "Faites-vous de la modélisation 3D ?",
+  //   a: "Oui. Nous réalisons des modèles 3D, de la visualisation et des rendus adaptés aux besoins du projet.",
+  // },
+  // {
+  //   q: "Faites-vous des plans de fabrication ?",
+  //   a: "Oui. Nous pouvons produire des plans de fabrication, des détails de mobilier sur mesure et la documentation technique nécessaire à vos équipes, ateliers ou entrepreneurs.",
+  // },
+  {
+    q: "Pouvez-vous prendre en charge un projet complet ?",
+    a: "Oui. Nous pouvons intervenir sur une partie précise du mandat ou prendre en charge la conception et la production technique d'un projet complet, selon vos besoins.",
+  },
+  {
+    q: "Pouvez-vous simplement réaliser un dessin ?",
+    a: "Oui. Nous pouvons intervenir sur un besoin ponctuel, d'un seul dessin à un dossier technique complet.",
+  },
+  {
+    q: "Comment se déroule un projet ?",
+    a: "Le processus se déroule en quatre étapes : analyse et prise de brief, conception et production, révision et validation, puis livraison et accompagnement.",
+  },
+  {
+    q: "Comment fonctionne la prise de brief ?",
+    a: "Nous commençons par comprendre le mandat, vos besoins, vos standards, les fichiers existants et les contraintes du projet afin de définir clairement les objectifs.",
+  },
+  {
+    q: "Que dois-je vous transmettre pour commencer ?",
+    a: "Vous pouvez nous transmettre le mandat, vos fichiers existants, vos références, vos standards, les exigences du client et toute contrainte particulière liée au projet.",
+  },
+  {
+    q: "Qui travaille sur mon projet ?",
+    a: "Le projet est confié au designer de notre équipe dont les compétences correspondent le mieux aux exigences du mandat.",
+  },
+  {
+    q: "Travaillez-vous selon nos standards ?",
+    a: "Oui. La production est réalisée selon les logiciels, standards, méthodes et exigences convenus avec votre équipe.",
+  },
+  {
+    q: "Pouvez-vous travailler avec nos gabarits ?",
+    a: "Oui. Vous pouvez nous transmettre vos gabarits et références afin que les livrables soient produits selon votre façon de travailler.",
+  },
+  {
+    q: "Les livrables sont-ils réalisés sous notre image de marque ?",
+    a: "Oui. Nous travaillons de manière discrète et produisons les livrables selon vos standards et votre image de marque.",
+  },
+  {
+    q: "Mon client saura-t-il que je travaille avec DIS Studio ?",
+    a: "Vous demeurez le seul point de contact avec votre client. DIS Studio intervient comme une extension de votre équipe.",
+  },
+  {
+    q: "Travaillez-vous en marque blanche ?",
+    a: "Notre collaboration est conçue pour vous permettre de rester le point de contact avec votre client. Les livrables sont produits selon vos standards et votre image de marque.",
+  },
+  {
+    q: "Mes projets sont-ils confidentiels ?",
+    a: "Oui. Nous privilégions une collaboration discrète et confidentielle, intégrée à votre façon de travailler.",
+  },
+  {
+    q: "Quels logiciels utilisez-vous ?",
+    a: "Nous travaillons notamment avec AutoCAD pour les plans 2D et la documentation technique, 3ds Max pour la modélisation et les rendus 3D, Revit pour le BIM et les plans coordonnés, et SketchUp pour la conception et la modélisation rapide.",
+  },
+  // {
+  //   q: "Travaillez-vous avec AutoCAD ?",
+  //   a: "Oui. AutoCAD est utilisé notamment pour les plans 2D, les dessins techniques et la documentation.",
+  // },
+  // {
+  //   q: "Travaillez-vous avec Revit ?",
+  //   a: "Oui. Nous utilisons Revit pour la modélisation BIM et la production de plans coordonnés.",
+  // },
+  // {
+  //   q: "Travaillez-vous avec SketchUp ?",
+  //   a: "Oui. SketchUp est utilisé pour la conception et la modélisation rapide des espaces.",
+  // },
+  // {
+  //   q: "Travaillez-vous avec 3ds Max ?",
+  //   a: "Oui. 3ds Max est utilisé pour la modélisation 3D, la visualisation et les rendus.",
+  // },
+  {
+    q: "Quels formats de fichiers livrez-vous ?",
+    a: "Les fichiers finaux et fichiers sources sont remis dans les formats convenus avec le client, afin qu'ils puissent être directement utilisés par vos équipes, votre atelier ou votre chantier.",
+  },
+  {
+    q: "Est-ce que je reçois les fichiers sources ?",
+    a: "Oui. Les fichiers sources peuvent être remis avec les livrables finaux, dans les formats convenus au début du projet.",
+  },
+  // {
+  //   q: "Les fichiers sont-ils prêts pour le chantier ?",
+  //   a: "Les livrables sont préparés pour être intégrés à votre projet et transmis à vos équipes, à l'atelier ou au chantier, selon les exigences définies pour le mandat.",
+  // },
+  {
+    q: "Comment fonctionne la révision ?",
+    a: "DIS Studio vérifie les livrables avant leur transmission. Les ajustements nécessaires sont effectués jusqu'à validation du projet.",
+  },
+  {
+    q: "Puis-je demander des modifications ?",
+    a: "Oui. Les livrables sont révisés et les ajustements nécessaires sont effectués jusqu'à validation, selon le cadre convenu pour le mandat.",
+  },
+  // {
+  //   q: "Faites-vous un contrôle qualité ?",
+  //   a: "Oui. DIS Studio effectue une vérification des livrables avant leur transmission afin de s'assurer qu'ils correspondent aux exigences convenues.",
+  // },
+  // {
+  //   q: "Quels sont vos délais pour des rendus 3D ?",
+  //   a: "Le délai dépend du nombre de vues, de la complexité du modèle et de l'état des fichiers de départ. Nous confirmons un échéancier précis à la réception de votre demande, et nous replanifions volontiers les projets urgents.",
+  // },
+  // {
+  //   q: "Pouvez-vous traiter un projet urgent ?",
+  //   a: "Oui. Les projets urgents peuvent être évalués au cas par cas. Le délai dépend notamment de la charge de travail, de la complexité du mandat et des fichiers disponibles.",
+  // },
+  // {
+  //   q: "Quels sont vos délais ?",
+  //   a: "Le délai dépend du type de mandat, de sa complexité, du volume de livrables et de l'état des fichiers de départ. Nous confirmons un échéancier précis après analyse de votre demande.",
+  // },
+  // {
+  //   q: "Combien coûte un projet ?",
+  //   a: "Le coût dépend du type de mandat, de sa complexité, du volume de travail et des livrables souhaités. Contactez-nous avec les détails du projet afin que nous puissions l'évaluer.",
+  // },
+  // {
+  //   q: "Avez-vous des tarifs fixes ?",
+  //   a: "Les projets sont évalués selon leurs besoins spécifiques. Nous adaptons notre intervention au volume et à la complexité du mandat plutôt que d'appliquer un tarif unique à tous les projets.",
+  // },
+  // {
+  //   q: "Puis-je vous confier seulement une partie de mon projet ?",
+  //   a: "Oui. DIS Studio peut renforcer votre équipe sur une étape précise ou prendre en charge une partie plus importante du projet, selon votre charge de travail.",
+  // },
+  // {
+  //   q: "Pouvez-vous renforcer mon équipe pendant une période de forte charge ?",
+  //   a: "Oui. Notre modèle permet d'augmenter votre capacité de production de façon flexible, notamment lors des périodes de forte charge de travail.",
+  // },
+  {
+    q: "Pourquoi externaliser ma production technique ?",
+    a: "L'externalisation vous permet d'augmenter votre capacité de production, de respecter vos échéanciers et de limiter vos coûts fixes sans recruter de nouvelles ressources.",
+  },
+  {
+    q: "Pourquoi travailler avec DIS Studio plutôt que recruter ?",
+    a: "DIS Studio vous donne accès à une capacité technique flexible selon votre charge de travail, sans ajouter de nouvelles ressources permanentes à votre équipe.",
   },
   {
     q: "Puis-je suivre mon projet en ligne ?",
     a: "Oui. Chaque demande ouvre un espace client où vous suivez l'avancement, échangez avec l'équipe et téléchargez les documents au fur et à mesure. Vous recevez un courriel à chaque changement d'étape.",
+  },
+  {
+    q: "Comment suivre l'avancement de mon projet ?",
+    a: "Vous disposez d'un espace client en ligne pour suivre l'avancement, communiquer avec l'équipe et télécharger les documents disponibles.",
+  },
+  {
+    q: "Recevrai-je des notifications ?",
+    a: "Oui. Vous recevez un courriel lors des changements d'étape de votre projet.",
+  },
+  {
+    q: "Comment vous contacter ?",
+    a: "Vous pouvez contacter DIS Studio à l'adresse contact@disstudio.tn pour présenter votre projet et vos besoins.",
+  },
+  {
+    q: "Où êtes-vous situés ?",
+    a: "DIS Studio est situé à Upton, au Québec, Canada.",
+  },
+  {
+    q: "Depuis quand existe DIS Studio ?",
+    a: "DIS Studio accompagne des projets depuis 2022.",
+  },
+  {
+    q: "À qui s'adresse DIS Studio ?",
+    a: "DIS Studio s'adresse principalement aux professionnels de l'aménagement : firmes de design, cabinets d'architecture, fabricants de mobilier et entreprises d'aménagement.",
+  },
+  {
+    q: "Travaillez-vous avec des particuliers ?",
+    a: "DIS Studio est principalement positionné comme un partenaire technique pour les professionnels de l'aménagement et les entreprises.",
+  },
+  {
+    q: "Quel est votre rôle dans un projet ?",
+    a: "Nous intervenons comme une extension de votre équipe pour prendre en charge tout ou partie des besoins en conception, dessin technique et modélisation 3D.",
+  },
+  {
+    q: "Que gagne-t-on à travailler avec DIS Studio ?",
+    a: "Vous gagnez principalement en capacité, en rapidité et en rentabilité : vous pouvez absorber davantage de projets, respecter vos échéanciers et limiter vos coûts fixes.",
+  },
+  {
+    q: "Pouvez-vous travailler avec notre équipe et nos méthodes ?",
+    a: "Oui. Nous nous intégrons à votre façon de travailler et produisons selon vos standards, vos méthodes et les exigences définies pour le projet.",
   },
 ];
 
