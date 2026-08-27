@@ -22,7 +22,7 @@ export default function Footer() {
               height={669}
             />
             <p style={{ marginTop: "1rem", maxWidth: "34ch", lineHeight: 1.7 }}>
-              {studio.tagline}. Conception et production à Tunis.
+              Augmentez votre capacité de production grâce à une équipe technique qui s’intègre à la vôtre
             </p>
           </div>
 

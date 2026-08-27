@@ -9,9 +9,8 @@ export default function Intro() {
   return (
     <section className="section section-joined shell">
       <div className="intro-grid">
-        <div className="intro-media" data-reveal>
-          {/* An architectural overview reads as "équipe de conception";
-              the slot is 3:2 to match this source without cropping. */}
+        {/* <div className="intro-media" data-reveal>
+
           <Image
             src={ambience.archiVerriere.src}
             alt={ambience.archiVerriere.alt}
@@ -19,7 +18,22 @@ export default function Intro() {
             sizes="(min-width: 56rem) 34vw, 92vw"
             style={{ objectFit: "cover" }}
           />
-        </div>
+        </div> */}
+          <div className="why-media" data-reveal>
+                  <Image
+                    src={ambience.archiVerriere.src}
+                    alt={ambience.archiVerriere.alt}
+                    fill
+                    sizes="(min-width: 46rem) 24vw, 82vw"
+                    /* A 16:9 render in a tall slot: centring it kept the empty sunlit
+                       floor and cropped away the sample displays that make it read as
+                       a showroom. Favour the upper band where that detail sits. */
+                    style={{ objectFit: "cover", objectPosition: "50% 32%" }}
+                  />
+                  <span className="why-watermark" aria-hidden="true">
+                    <Image src="/brand/logo-mark.png" alt="" width={464} height={298} />
+                  </span>
+                </div>
         <div>
           <p className="label" data-reveal>
             L’équipe

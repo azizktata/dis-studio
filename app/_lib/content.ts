@@ -25,6 +25,8 @@
  * rendered blank. The footer credit still applies: these are Unsplash photos.
  */
 const unsplash = (key: string) => `/ambiance/${key}.jpg`;
+const shot = (slug: string, n: number) =>
+  `/projets/${slug}/${String(n).padStart(2, "0")}.jpg`;
 
 export type Ambience = {
   key: string;
@@ -50,7 +52,7 @@ export const ambience = {
   },
   archiVerriere: {
     key: "archiVerriere",
-    src: unsplash("archiVerriere"),
+    src: shot("villa-wabi-sabi", 3),
     alt: "Espace de vie ouvert, sol bois et verrière pleine hauteur",
   },
   salonBois: {
@@ -123,8 +125,7 @@ export type Project = {
   deliverable: string;
 };
 
-const shot = (slug: string, n: number) =>
-  `/projets/${slug}/${String(n).padStart(2, "0")}.jpg`;
+
 
 /**
  * Every page of a rendered dossier, in order.
