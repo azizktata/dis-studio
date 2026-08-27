@@ -40,16 +40,19 @@ export default function Footer() {
             <h3>Naviguer</h3>
             <ul style={{ display: "grid", gap: "0.4rem" }}>
               <li>
-                <a href="#pourquoi">Pourquoi DIS</a>
+                <a href="#pourquoi">L’équipe</a>
               </li>
               <li>
                 <a href="#projets">Projets</a>
               </li>
               <li>
-                <a href="#services">Processus</a>
+                <a href="#processus">Processus</a>
               </li>
               <li>
-                <a href="#studios">Partenaire technique</a>
+                <a href="#studios">Partenariats</a>
+              </li>
+              <li>
+                <a href="#galerie">Galerie</a>
               </li>
               <li>
                 <button onClick={openPortal}>Espace client</button>

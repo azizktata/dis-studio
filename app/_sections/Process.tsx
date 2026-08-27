@@ -2,7 +2,7 @@ import { services } from "../_lib/content";
 
 export default function Process() {
   return (
-    <section className="section shell" id="services">
+    <section className="section shell" id="processus">
       <div className="sec-head">
         <h2 data-reveal>Notre processus de collaboration</h2>
       </div>
