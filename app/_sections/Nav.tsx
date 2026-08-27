@@ -35,7 +35,7 @@ export default function Nav() {
         <nav className="nav-links" aria-label="Principale">
           <a href="#pourquoi">L’équipe</a>
           <a href="#projets">Projets</a>
-          <a href="#services">Processus</a>
+          <a href="#processus">Processus</a>
           <a href="#studios">Partenariats</a>
           <a href="#galerie">Galerie</a>
           {/* <a href="#contact">Contact</a> */}
