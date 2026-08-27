@@ -46,8 +46,6 @@ export function useIntake() {
   const [submitted, setSubmitted] = useState(false);
   const [showErrors, setShowErrors] = useState(false);
 
-  const isB2B = answers.service === "b2b";
-
   const set = useCallback(<K extends keyof IntakeAnswers>(key: K, value: IntakeAnswers[K]) => {
     setAnswers((prev) => ({ ...prev, [key]: value }));
   }, []);
@@ -63,18 +61,15 @@ export function useIntake() {
 
   const errors = useMemo(() => {
     const e: Partial<Record<keyof IntakeAnswers, string>> = {};
-    if (step === 0 && !answers.service) {
-      e.service = "Choisissez une prestation pour continuer.";
-    }
+    // if (step === 0 && !answers.service) {
+    //   e.service = "Choisissez une prestation pour continuer.";
+    // }
     if (step === 1) {
-      if (isB2B) {
+    
         if (!answers.volume) e.volume = "Indiquez le volume envisagé.";
         if (answers.software.length === 0)
           e.software = "Sélectionnez au moins un logiciel.";
-      } else {
-        if (!answers.surface) e.surface = "Indiquez une surface approximative.";
-        if (!answers.timeline) e.timeline = "Indiquez une échéance.";
-      }
+     
     }
     if (step === 2) {
       if (!answers.name.trim()) e.name = "Votre nom est requis.";
@@ -82,7 +77,7 @@ export function useIntake() {
         e.email = "Saisissez une adresse courriel valide.";
     }
     return e;
-  }, [step, answers, isB2B]);
+  }, [step, answers]);
 
   const canAdvance = Object.keys(errors).length === 0;
 
@@ -116,7 +111,6 @@ export function useIntake() {
     answers,
     errors: showErrors ? errors : {},
     submitted,
-    isB2B,
     canAdvance,
     set,
     toggleSoftware,

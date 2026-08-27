@@ -583,23 +583,18 @@ export const intakeServices: {
 }[] = [
   {
     key: "design",
-    label: "Design complet",
-    hint: "Concept, aménagement et matières pour un lieu entier",
+    label: "Phase 1",
+    hint: "Vous transmettez le mandat à DIS Studio",
   },
   {
     key: "plans2d",
-    label: "Plans 2D",
-    hint: "Plans techniques, coupes, façades et documentation",
-  },
-  {
-    key: "rendus3d",
-    label: "Rendus 3D",
-    hint: "Modélisation et images d'ambiance ou de produit",
+    label: "Phase 2",
+    hint: "Nous sélectionnons les ressources adaptées et Notre équipe réalise la conception et la production technique",
   },
   {
     key: "b2b",
-    label: "Partenaire technique (B2B)",
-    hint: "Capacité de conception pour une firme de design ou un fabricant",
+    label: "Phase 3",
+    hint: "DIS contrôle les livrables → vous récupérez les fichiers professionnels selon vos standards.",
   },
 ];
 

@@ -23,7 +23,6 @@ export default function IntakeWizard({ open, onClose }: Props) {
     answers,
     errors,
     submitted,
-    isB2B,
     set,
     toggleSoftware,
     next,
@@ -99,7 +98,7 @@ export default function IntakeWizard({ open, onClose }: Props) {
               {step === 0 && (
                 <fieldset className="wiz-field">
                   <legend className="wiz-legend">
-                    Quelle prestation vous intéresse&nbsp;?
+                    Processus de collaboration
                   </legend>
                   <div className="wiz-choices">
                     {intakeServices.map((s) => (
@@ -108,13 +107,7 @@ export default function IntakeWizard({ open, onClose }: Props) {
                         className="wiz-choice"
                         data-checked={answers.service === s.key}
                       >
-                        <input
-                          type="radio"
-                          name="service"
-                          value={s.key}
-                          checked={answers.service === s.key}
-                          onChange={() => set("service", s.key)}
-                        />
+                       
                         <span className="wiz-choice-t">{s.label}</span>
                         <span className="wiz-choice-h">{s.hint}</span>
                       </label>
@@ -124,10 +117,9 @@ export default function IntakeWizard({ open, onClose }: Props) {
                 </fieldset>
               )}
 
-              {step === 1 && (
+              {step === 1 && ( 
                 <div className="wiz-stack">
-                  {isB2B ? (
-                    <>
+                  <>
                       <Choice
                         label="Quel volume envisagez-vous ?"
                         name="volume"
@@ -165,10 +157,8 @@ export default function IntakeWizard({ open, onClose }: Props) {
                         value={answers.timeline}
                         onChange={(v) => set("timeline", v)}
                       />
-                    </>
-                  ) : (
-                    <>
-                      <Choice
+                  
+                      {/* <Choice
                         label="Quelle surface approximative ?"
                         name="surface"
                         options={surfaces}
@@ -190,9 +180,10 @@ export default function IntakeWizard({ open, onClose }: Props) {
                         options={budgets}
                         value={answers.budget}
                         onChange={(v) => set("budget", v)}
-                      />
+                      /> */}
+                    
                     </>
-                  )}
+                  
                 </div>
               )}
 
@@ -222,7 +213,7 @@ export default function IntakeWizard({ open, onClose }: Props) {
                     textarea
                     optional
                   />
-                  <label className="wiz-check wiz-check-wide" data-checked={answers.createAccount}>
+                  {/* <label className="wiz-check wiz-check-wide" data-checked={answers.createAccount}>
                     <input
                       type="checkbox"
                       checked={answers.createAccount}
@@ -232,7 +223,7 @@ export default function IntakeWizard({ open, onClose }: Props) {
                       Ouvrir mon espace client pour suivre l’avancement
                       <em>Suivi du dossier, documents et échanges au même endroit.</em>
                     </span>
-                  </label>
+                  </label> */}
                 </div>
               )}
             </div>
