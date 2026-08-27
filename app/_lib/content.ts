@@ -690,34 +690,12 @@ export const chatScript: { q: string; a: string }[] = [
     q: "Quels types de clients accompagnez-vous ?",
     a: "Nous travaillons principalement avec les firmes de design, cabinets d'architecture, fabricants de mobilier et entreprises d'aménagement.",
   },
-  // {
-  //   q: "Travaillez-vous avec des firmes de design ?",
-  //   a: "Oui. DIS Studio agit comme une extension de votre équipe afin d'augmenter votre capacité de production, sans avoir à recruter de nouvelles ressources.",
-  // },
-  // {
-  //   q: "Travaillez-vous avec des architectes ?",
-  //   a: "Oui. Nous accompagnons les cabinets d'architecture dans leurs besoins de conception, dessin technique, modélisation 3D et documentation.",
-  // },
-  // {
-  //   q: "Faites-vous des plans 2D ?",
-  //   a: "Oui. Nous réalisons des plans techniques 2D et de la documentation selon les standards et exigences convenus avec votre équipe.",
-  // },
-  // {
-  //   q: "Faites-vous de la modélisation 3D ?",
-  //   a: "Oui. Nous réalisons des modèles 3D, de la visualisation et des rendus adaptés aux besoins du projet.",
-  // },
-  // {
-  //   q: "Faites-vous des plans de fabrication ?",
-  //   a: "Oui. Nous pouvons produire des plans de fabrication, des détails de mobilier sur mesure et la documentation technique nécessaire à vos équipes, ateliers ou entrepreneurs.",
-  // },
+
   {
     q: "Pouvez-vous prendre en charge un projet complet ?",
     a: "Oui. Nous pouvons intervenir sur une partie précise du mandat ou prendre en charge la conception et la production technique d'un projet complet, selon vos besoins.",
   },
-  {
-    q: "Pouvez-vous simplement réaliser un dessin ?",
-    a: "Oui. Nous pouvons intervenir sur un besoin ponctuel, d'un seul dessin à un dossier technique complet.",
-  },
+
   {
     q: "Comment se déroule un projet ?",
     a: "Le processus se déroule en quatre étapes : analyse et prise de brief, conception et production, révision et validation, puis livraison et accompagnement.",
@@ -762,22 +740,7 @@ export const chatScript: { q: string; a: string }[] = [
     q: "Quels logiciels utilisez-vous ?",
     a: "Nous travaillons notamment avec AutoCAD pour les plans 2D et la documentation technique, 3ds Max pour la modélisation et les rendus 3D, Revit pour le BIM et les plans coordonnés, et SketchUp pour la conception et la modélisation rapide.",
   },
-  // {
-  //   q: "Travaillez-vous avec AutoCAD ?",
-  //   a: "Oui. AutoCAD est utilisé notamment pour les plans 2D, les dessins techniques et la documentation.",
-  // },
-  // {
-  //   q: "Travaillez-vous avec Revit ?",
-  //   a: "Oui. Nous utilisons Revit pour la modélisation BIM et la production de plans coordonnés.",
-  // },
-  // {
-  //   q: "Travaillez-vous avec SketchUp ?",
-  //   a: "Oui. SketchUp est utilisé pour la conception et la modélisation rapide des espaces.",
-  // },
-  // {
-  //   q: "Travaillez-vous avec 3ds Max ?",
-  //   a: "Oui. 3ds Max est utilisé pour la modélisation 3D, la visualisation et les rendus.",
-  // },
+
   {
     q: "Quels formats de fichiers livrez-vous ?",
     a: "Les fichiers finaux et fichiers sources sont remis dans les formats convenus avec le client, afin qu'ils puissent être directement utilisés par vos équipes, votre atelier ou votre chantier.",
@@ -786,10 +749,7 @@ export const chatScript: { q: string; a: string }[] = [
     q: "Est-ce que je reçois les fichiers sources ?",
     a: "Oui. Les fichiers sources peuvent être remis avec les livrables finaux, dans les formats convenus au début du projet.",
   },
-  // {
-  //   q: "Les fichiers sont-ils prêts pour le chantier ?",
-  //   a: "Les livrables sont préparés pour être intégrés à votre projet et transmis à vos équipes, à l'atelier ou au chantier, selon les exigences définies pour le mandat.",
-  // },
+
   {
     q: "Comment fonctionne la révision ?",
     a: "DIS Studio vérifie les livrables avant leur transmission. Les ajustements nécessaires sont effectués jusqu'à validation du projet.",
@@ -798,38 +758,7 @@ export const chatScript: { q: string; a: string }[] = [
     q: "Puis-je demander des modifications ?",
     a: "Oui. Les livrables sont révisés et les ajustements nécessaires sont effectués jusqu'à validation, selon le cadre convenu pour le mandat.",
   },
-  // {
-  //   q: "Faites-vous un contrôle qualité ?",
-  //   a: "Oui. DIS Studio effectue une vérification des livrables avant leur transmission afin de s'assurer qu'ils correspondent aux exigences convenues.",
-  // },
-  // {
-  //   q: "Quels sont vos délais pour des rendus 3D ?",
-  //   a: "Le délai dépend du nombre de vues, de la complexité du modèle et de l'état des fichiers de départ. Nous confirmons un échéancier précis à la réception de votre demande, et nous replanifions volontiers les projets urgents.",
-  // },
-  // {
-  //   q: "Pouvez-vous traiter un projet urgent ?",
-  //   a: "Oui. Les projets urgents peuvent être évalués au cas par cas. Le délai dépend notamment de la charge de travail, de la complexité du mandat et des fichiers disponibles.",
-  // },
-  // {
-  //   q: "Quels sont vos délais ?",
-  //   a: "Le délai dépend du type de mandat, de sa complexité, du volume de livrables et de l'état des fichiers de départ. Nous confirmons un échéancier précis après analyse de votre demande.",
-  // },
-  // {
-  //   q: "Combien coûte un projet ?",
-  //   a: "Le coût dépend du type de mandat, de sa complexité, du volume de travail et des livrables souhaités. Contactez-nous avec les détails du projet afin que nous puissions l'évaluer.",
-  // },
-  // {
-  //   q: "Avez-vous des tarifs fixes ?",
-  //   a: "Les projets sont évalués selon leurs besoins spécifiques. Nous adaptons notre intervention au volume et à la complexité du mandat plutôt que d'appliquer un tarif unique à tous les projets.",
-  // },
-  // {
-  //   q: "Puis-je vous confier seulement une partie de mon projet ?",
-  //   a: "Oui. DIS Studio peut renforcer votre équipe sur une étape précise ou prendre en charge une partie plus importante du projet, selon votre charge de travail.",
-  // },
-  // {
-  //   q: "Pouvez-vous renforcer mon équipe pendant une période de forte charge ?",
-  //   a: "Oui. Notre modèle permet d'augmenter votre capacité de production de façon flexible, notamment lors des périodes de forte charge de travail.",
-  // },
+
   {
     q: "Pourquoi externaliser ma production technique ?",
     a: "L'externalisation vous permet d'augmenter votre capacité de production, de respecter vos échéanciers et de limiter vos coûts fixes sans recruter de nouvelles ressources.",
